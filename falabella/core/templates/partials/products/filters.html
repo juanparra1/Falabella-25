@@ -1,0 +1,108 @@
+{% load static %}
+<!-- filters.html -->
+<div id="filters-container" class="col-md-2">
+    <div>
+        <h5>Filtros</h5>
+        <div class="accordion simple-accordion" id="filtersAccordion">
+            <!-- Tipo de envío -->
+            <div class="container" id="container-tipoEnvio">
+            <h5 class="form-label">Tipo de envío</h5>
+            
+            <!-- Envío gratis -->
+            <div class="envio-option">
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="envio" data-value="gratis">Envío gratis</button>
+                <p>En productos seleccionados por compras desde $149.990</p>
+            </div>
+            
+            <!-- Envío a domicilio -->
+            <div class="envio-option">
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="envio" data-value="rapido">Entrega rápida</button>
+                <p>Llega mañana</p>
+                <p>Retiro en un punto</p>
+            </div>
+            
+            <!-- Retiro en punto -->
+            <div class="envio-option">
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="envio" data-value="retiro">Retiro en punto</button>
+                <p>Si compras hasta las 16:00 horas retira hoy</p>
+                <p>Retira hoy</p>
+                <p>Retira mañana</p>
+            </div>
+            </div>
+            
+            <!-- Categoría -->
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="headingCategory">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
+                Categoría
+                </button>
+            </h2>
+            <div id="collapseCategory" class="accordion-collapse collapse show" aria-labelledby="headingCategory"
+                data-bs-parent="#filtersAccordion">
+                <div class="accordion-body">
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="categoria" data-value="moda">Moda y accesorios</button>
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="categoria" data-value="deportes">Deportes y aire libre</button>
+                </div>
+            </div>
+            </div>
+            
+            <!-- Marca -->
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="headingBrand">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseBrand" aria-expanded="false" aria-controls="collapseBrand">
+                Marca
+                </button>
+            </h2>
+            <div id="collapseBrand" class="accordion-collapse collapse" aria-labelledby="headingBrand"
+                data-bs-parent="#filtersAccordion">
+                <div class="accordion-body">
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="marca" data-value="arkitec">ARKITEC</button>
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="marca" data-value="falabella">Falabella</button>
+                </div>
+            </div>
+            </div>
+            
+            <!-- Precio -->
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPrice">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice">
+                Precio
+                </button>
+            </h2>
+            <div id="collapsePrice" class="accordion-collapse collapse" aria-labelledby="headingPrice"
+                data-bs-parent="#filtersAccordion">
+                <div class="accordion-body">
+                <div class="price-range">
+                    <input type="range" class="form-range" min="0" max="500000" step="10000" id="priceRange">
+                    <div class="d-flex justify-content-between">
+                    <span id="minPrice">$0</span>
+                    <span id="maxPrice">$500.000</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            
+            <!-- Descuentos -->
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="headingDiscount">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#collapseDiscount" aria-expanded="false" aria-controls="collapseDiscount">
+                Descuentos
+                </button>
+            </h2>
+            <div id="collapseDiscount" class="accordion-collapse collapse" aria-labelledby="headingDiscount"
+                data-bs-parent="#filtersAccordion">
+                <div class="accordion-body">
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="descuento" data-value="10-20">10% - 20%</button>
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="descuento" data-value="20-30">20% - 30%</button>
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="descuento" data-value="30-50">30% - 50%</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

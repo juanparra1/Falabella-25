@@ -1,0 +1,18 @@
+{% load static %}
+<!-- vista de productos -->
+<div class="container-fluid mt-4">
+    <div class="row justify-content-center">
+        <!-- filtros -->
+        {% include 'partials/products/filters.html' %}
+
+        <div class="col-md-6" id="product-container" style="display: none;">
+            <div>
+            <h5>Productos</h5>
+            <div class="row" id="products-list">
+                <!-- Aquí se agregarán los productos dinámicamente -->
+            </div>
+            </div>
+        </div>
+
+    </div>
+</div>

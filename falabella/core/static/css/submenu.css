@@ -1,0 +1,196 @@
+/* submenu.css - Estilos para el submenú de navegación */
+
+.submenu {
+    position: absolute;
+    left: 250px;
+    top: 0;
+    height: 95vh;
+    width: 900px;
+    background-color: white;
+    border-left: 1px solid #dee2e6;
+    padding: 1rem;
+    display: none;
+    z-index: 1050;
+    overflow-y: auto;
+    padding-top: 60px;
+    transition: all 0.2s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submenu, .menu-item:hover .submenu {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.menu-item .submenu {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.menu-item:hover .submenu,
+.submenu:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+/* Estilos para la barra de desplazamiento */
+.submenu::-webkit-scrollbar {
+    width: 16px !important;
+    display: block !important;
+}
+
+.submenu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+    margin: 5px;
+    margin-top: 1cm;
+}
+
+.submenu::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+    min-height: 50px;
+    border: 3px solid #f1f1f1;
+}
+
+.submenu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.submenu,
+.offcanvas-body {
+    overflow-y: auto;
+    scrollbar-width: thick;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+/* Estilos específicos para la barra de desplazamiento */
+.submenu::-webkit-scrollbar,
+.offcanvas-body::-webkit-scrollbar {
+    width: 20px !important;
+    display: block !important;
+}
+
+.submenu::-webkit-scrollbar-track,
+.offcanvas-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+    margin: 5px;
+    margin-top: 1cm;
+}
+
+.submenu::-webkit-scrollbar-thumb,
+.offcanvas-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+    min-height: 60px;
+}
+
+.submenu::-webkit-scrollbar-thumb:hover,
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Asegura que el contenedor del submenu tenga suficiente contenido para scroll */
+.submenu ul,
+.offcanvas-body ul {
+    min-height: 120vh;
+    padding-bottom: 200px;
+}
+
+.menu-item:hover .submenu {
+    display: block;
+}
+
+/* Estilo específico para el submenu de Tecnología */
+#tecnologia-link+i+.submenu {
+    border-radius: 0 15px 15px 0;
+    border-left: 2px solid #dee2e6;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustar el contenedor del submenu */
+#tecnologia-link+i+.submenu::-webkit-scrollbar-track {
+    border-radius: 0 10px 10px 0;
+    margin: 5px;
+    margin-top: 1cm;
+}
+
+/* Ajustar la barra de desplazamiento */
+#tecnologia-link+i+.submenu::-webkit-scrollbar {
+    border-radius: 0 10px 10px 0;
+    margin-right: 5px;
+}
+
+/* Ajustar el espaciado superior del contenido del submenu */
+.submenu .row {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+/* Si necesitas ajustar específicamente las columnas */
+.submenu .col-md-3 {
+    margin-top: 15px;
+}
+
+/* Ajustar el título del submenu */
+.submenu h6 {
+    margin-top: 15px;
+}
+
+/* Estilos para el título del submenu */
+.submenu-title {
+    background: linear-gradient(90deg, rgb(106, 149, 0), rgb(141, 199, 0));
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+/* Estilos para los elementos del menú */
+.list-unstyled {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+.menu-item:hover {
+    background-color: #f1f1f1;
+}
+
+.menu-item:hover>span {
+    font-weight: bold;
+}
+
+.menu-item:hover .submenu {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.submenu:hover,
+.menu-item:hover .submenu {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para los enlaces de categoría */
+.category-link:hover {
+    color: #000;
+    font-weight: bold;
+    border-radius: 5px;
+}

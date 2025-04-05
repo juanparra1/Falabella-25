@@ -1,0 +1,127 @@
+{% load static %}
+
+<!-- Navbar Homecenter / Linio -->
+<nav class="flex justify-between items-center border-b border-gray-200">
+    <div class="btn btn-group">
+      <a href="#" aria-current="page" class="py-3  object-contain px-2">
+        <img src="{% static 'img/falIconButton.png' %}" alt="Falabella Icon" width="90" height="15">
+      </a>
+      <a href="https://homecenter.falabella.com.co/homecenter-co" class="py-3 object-contain px-2">
+        <img src="{% static 'img/homIconButton.png' %}" alt="Homecenter Icon" width="115" height="10">
+      </a>
+      <a href="https://linio.falabella.com.co/linio-co" class="py-1 object-contain px-2">
+        <img src="{% static 'img/linIconButton.png' %}" alt="Linio Icon" width="50" height="30">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Navbar -->
+  <nav
+    class="navbar border-bottom border-gray-200 d-flex align-items-center justify-content-between px-3 py-2 bg-gray-50">
+    <!-- Logo + Menu -->
+    <div class="d-flex align-items-center">
+      <!-- Logo -->
+      <div class="me-3">
+        <img src="{% static 'img/falLogo.png' %}" alt="Falabella Icon" width="150" height="50">
+      </div>
+      <!-- Offcanvas Menu Button -->
+      <button class="d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+        <i class="bi bi-list"></i> <strong class="fs-5">Menú</strong>
+      </button>
+      <!---
+    <button class="d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+      <i class="bi bi-list fs-1"></i> <strong class="fs-5">Menú</strong>
+    </button>
+    -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel"
+      style="width: 250px;">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">¡Hola!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="list-unstyled">
+          <li class="d-flex justify-content-between align-items-center menu-item">
+            <span href="#" id="rebajas-link">Rebajas Vestuario</span>
+            <i class="bi bi-chevron-right"></i>
+            <div class="submenu">
+              <h5 class="submenu-title">Rebajas Vestuario</h5>
+              {% include 'partials/submenu.html' %}
+
+            <li class="mb-4" style="width: 150px;"></li>
+            <hr class="my-4">
+            <li><a href="#" style="text-decoration: none; color: black; font-size: x-small;"><small><strong>TIENDAS
+                    OFICIALES</strong></small></a></li>
+            <li class="mb-4" style="width: 100px;"></li>
+            <li><a href="#"><img src="{% static 'img/homIconButton.png' %}" alt="Homecenter Icon" width="100"
+                  height="30"></a></li>
+            <li class="mb-4" style="width: 100px;"></li>
+
+            <hr class="my-4">
+            <li><a href="#" style="text-decoration: none;"></a>Vende en falabella.com</a></li>
+            <hr class="my-4">
+            <li><a href="#" id="guias-compras-link" style="text-decoration: none;"></a>Guias de compras</a></li>
+            <li class="mb-4" style="width: 100px;"></li>
+            <li><a href="#" id="horario-tiendas-link" style="text-decoration: none;"><a>Horario de tiendas</a></a>
+            </li>
+            <li class="mb-4" style="width: 100px; font-size: larger;"></li>
+            <hr class="my-4">
+            <img src="{% static 'img/falIconButton.png' %}" alt="falIconButton" width="115" height="10">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Search bar -->
+    <div class="flex-grow-1 mx-4">
+      <div class="input-group">
+        <input class="form-control rounded-pill py-2 bg-transparent" type="search"
+          placeholder="Buscar en falabella.com" aria-label="Search">
+        <span class="position-absolute top-50 end-0 translate-middle-y me-2 bg-secondary rounded-circle"
+          style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+          <i class="bi bi-search text-white"></i>
+        </span>
+      </div>
+    </div>
+    <!-- Links -->
+    <nav class="navbar p-2">
+      <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Login -->
+        <div class="d-flex flex-column align-items-start" id="loginArea">
+          <strong class="  mb-0 fs-5">Hola,</strong> <!-- Aumentar el tamaño del texto -->
+          <div class="d-flex align-items-center">
+            <strong class="  fs-5 semi-bold-on-hover">Inicia sesión</strong>
+            <!-- Aumentar el tamaño del texto -->
+            <i class="bi bi-chevron-down ms-1 fs-5" id="chevronIcon"></i> <!-- Aumentar el tamaño del ícono -->
+          </div>
+        </div>
+        <!-- Divider -->
+        <div class="vr mx-3"></div>
+        <!-- Mis compras -->
+        <div class="d-flex align-items-center" id="misCompras">
+          <div class="d-flex flex-column" style="line-height: 1;">
+            <strong class=" ">Mis</strong>
+            <strong class="  fw-bold">compras</strong>
+          </div>
+        </div>
+        <!-- Divider -->
+        <div class="vr mx-3"></div>
+        <!-- Liked -->
+        <a href="#">
+          <i class="bi bi-heart   fs-4"></i>
+        </a>
+        <!-- Divider -->
+        <div class="vr mx-3"></div>
+        <!-- Cart -->
+        <div class="position-relative me-3">
+          <a href="#" class="text-decoration-none">
+            <i class="bi bi-cart3   fs-4"></i>
+          </a>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+            0
+          </span>
+        </div>
+      </div>
+    </nav>
+  </nav>

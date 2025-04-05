@@ -1,0 +1,63 @@
+#filters-container,
+    #product-container {
+        background-color: #f6efef;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    #filters-container h5,
+    #product-container h5 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    #filters-container .form-label,
+    #product-container .form-label {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    #filters-container .btn-outline-secondary,
+    #product-container .btn-outline-secondary {
+        margin-bottom: 10px;
+        width: 120px;
+        text-align: left;
+    }
+    
+    #filters-container .btn-outline-secondary:hover,
+    #product-container .btn-outline-secondary:hover {
+        background-color: #f1f1f1;
+    }
+    
+      /* Estilos específicos para #filters-container */
+    #filters-container {
+        /* Estilos adicionales para el contenedor de filtros */
+        max-width: 300px; /* Ancho máximo para el contenedor de filtros */
+        height: 100vh; /* Altura completa de la ventana */
+        overflow-y: auto; /* Permitir desplazamiento vertical */
+    }
+    
+    #filters-container h5 {
+        color: #333; /* Color personalizado para el título */
+    }
+    
+    #filters-container .form-label {
+        color: #555; /* Color personalizado para las etiquetas */
+    }
+    
+    #filters-container .btn-outline-secondary {
+        background-color: #fff; /* Fondo blanco para los botones */
+        border-color: #dee2e6; /* Color del borde */
+    }
+    
+    #filters-container .btn-outline-secondary:hover {
+        background-color: #e9ecef; /* Color de fondo al hacer hover */
+        border-color: #ced4da; /* Color del borde al hacer hover */
+    }
