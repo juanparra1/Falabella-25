@@ -1,121 +1,78 @@
 // products.js
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Cargar productos cuando se selecciona una categoría del menú
-    document.querySelectorAll('.category-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+    setupDynamicProducts();
+});
+
+function setupDynamicProducts() {
+    const carousel = document.getElementById('carouselExampleIndicators');
+    const productContainer = document.getElementById('product-container');
+    const filtersContainer = document.getElementById('filters-container');
+    const inlineRegisterForm = document.getElementById('inlineRegisterForm');
+
+    document.addEventListener('click', function (event) {
+    const registerLink = event.target.closest('#registerLink');
+        if (registerLink) {
+            event.preventDefault();
+            carousel.style.display = 'none';
+            inlineRegisterForm.style.display = 'block';
+            inlineRegisterForm.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    const categoryLinks = document.querySelectorAll('.category-link');
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
             const category = this.getAttribute('data-category');
             loadProducts(category);
+            filtersContainer.style.display = 'block';
+            productContainer.style.display = 'block';
+            productContainer.scrollIntoView({ behavior: 'smooth' });
         });
-    });
-
-    // Manejar filtros
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            applyFilters();
-        });
-    });
-
-    // Manejar rango de precios
-    const priceRange = document.getElementById('priceRange');
-    if (priceRange) {
-        priceRange.addEventListener('input', function() {
-            document.getElementById('minPrice').textContent = `$${formatPrice(this.value)}`;
-            applyFilters();
         });
     }
-
-    // Manejar ordenamiento
-    document.getElementById('sortProducts')?.addEventListener('change', function() {
-        sortProducts(this.value);
-        });
-    });
 
     function loadProducts(category) {
-        // Ocultar carrusel y mostrar vista de productos
-        document.getElementById('carouselExampleIndicators').style.display = 'none';
-        document.getElementById('filters-container').style.display = 'block';
-        document.getElementById('product-container').style.display = 'block';
-        
-        // Actualizar título de categoría
-        document.getElementById('category-title').textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        
-        // Simular carga de productos (en un caso real sería una llamada AJAX)
-        fetch(`/api/products?category=${category}`)
-        .then(response => response.json())
-        .then(data => {
-            displayProducts(data.products);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-    
-    function displayProducts(products) {
-        const container = document.getElementById('products-list');
-        container.innerHTML = '';
-    
-        if (products.length === 0) {
-        container.innerHTML = '<div class="col-12 text-center py-5"><h5>No hay productos disponibles</h5></div>';
-        return;
-        }
-    
-        products.forEach(product => {
-        const productCard = `
-            <div class="col">
-            <div class="card product-card h-100">
-                ${product.discount > 0 ? `<div class="badge-offer">-${product.discount}%</div>` : ''}
-                <img src="${product.image}" class="card-img-top p-3" alt="${product.name}">
-                <div class="card-body">
-                <p class="card-brand mb-1">${product.brand}</p>
-                <h5 class="card-title">${product.name}</h5>
-                <div class="price-container">
-                    <span class="current-price">$${formatPrice(product.price)}</span>
-                    ${product.originalPrice ? `<span class="original-price">$${formatPrice(product.originalPrice)}</span>` : ''}
-                </div>
-                ${product.freeShipping ? '<div class="shipping-badge">Envío gratis</div>' : ''}
-                ${product.lastUnits ? '<div class="last-units">Últimas unidades</div>' : ''}
-                </div>
-                <div class="card-footer bg-transparent">
-                <button class="btn btn-dark w-100 rounded-pill add-to-cart" data-id="${product.id}">Agregar al carro</button>
-                </div>
-            </div>
-            </div>
-        `;
-        container.insertAdjacentHTML('beforeend', productCard);
-        });
-    }
-    
-    function applyFilters() {
-        // Obtener filtros activos
-        const activeFilters = {
-        envio: [],
-        categoria: [],
-        marca: [],
-        descuento: [],
-        precioMin: document.getElementById('priceRange')?.value || 0
+        const products = {
+            'blusas': [
+                { name: 'Blusa 1', marca: 'ARKITEC', price: '$59.990', oldPrice: '$99.990', image: 'static/img/blusa1.png' },
+                { name: 'Blusa 2', marca: 'ARKITEC', price: '$49.990', oldPrice: '$79.990', image: 'static/img/blusa2.png' },
+                { name: 'Blusa 3', marca: 'ARKITEC', price: '$39.990', oldPrice: '$69.990', image: 'static/img/blusa3.png' }
+            ],
+            'camisetas': [
+                { name: 'Camiseta 1', price: '$15', oldPrice: '$20', image: 'img/camiseta1.jpg' },
+                { name: 'Camiseta 2', price: '$18', oldPrice: '$25', image: 'img/camiseta2.jpg' }
+            ]
         };
-    
-        document.querySelectorAll('.filter-btn.active').forEach(btn => {
-        const filterType = btn.getAttribute('data-filter');
-        const filterValue = btn.getAttribute('data-value');
-        if (activeFilters[filterType]) {
-            activeFilters[filterType].push(filterValue);
+
+        const selectedProducts = products[category] || [];
+        displayProducts(selectedProducts);
+    }
+
+    function displayProducts(products) {
+        const productsList = document.getElementById('products-list');
+        productsList.innerHTML = '';
+
+        if (products.length === 0) {
+            productsList.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
+            return;
         }
+
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'col-md-4 mb-4';
+        productCard.innerHTML = `
+            <div class="card product-card">
+                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                <div class="card-body">
+                    <h2 class="card-Title">${product.marca}</h2> 
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text"><strong>${product.price}</strong> <del>${product.oldPrice}</del></p>
+                    <button class="btn btn-dark w-100 rounded-pill">Agregar al carro</button>
+                </div>
+            </div>
+                `;
+            productsList.appendChild(productCard);
         });
-    
-        // Filtrar productos (en un caso real sería una llamada AJAX con los parámetros)
-        console.log('Aplicando filtros:', activeFilters);
-        // Aquí iría la lógica para filtrar los productos
-    }
-    
-    function sortProducts(criteria) {
-        // Lógica para ordenar productos
-        console.log('Ordenando por:', criteria);
-    }
-    
-    function formatPrice(price) {
-        return new Intl.NumberFormat('es-CO').format(price);
-    }
+}

@@ -42,6 +42,9 @@
 
             <!-- Contenido principal -->
             <main>
+                <!-- Carrusel -->
+                {% include 'partials/carousel.html' %}
+
                 <!-- Mensajes -->
                 {% if messages %}
                     <div class="container mt-3">
@@ -58,9 +61,7 @@
                 
                 <!-- vista de productos -->
                 {% include 'partials/products/products.html' %}
-
-                <!-- Carrusel -->
-                {% include 'partials/carousel.html' %}
+                
             </main>
 
             <!-- Modales -->
@@ -82,10 +83,12 @@
         <!-- JS personalizado -->
         <script src="{% static 'js/utils.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/popovers.js' %}"></script>
         <script src="{% static 'js/auth.js' %}"></script>
         <script src="{% static 'js/products.js' %}"></script>
         <script src="{% static 'js/cart.js' %}"></script>
         <script src="{% static 'js/products.js' %}"></script>
+        <script src="{% static 'js/submenu.js' %}"></script>
         
         {% block extra_js %}{% endblock %}
     </body>
