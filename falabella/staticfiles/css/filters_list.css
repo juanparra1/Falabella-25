@@ -1,0 +1,198 @@
+        #filters-container,
+        #product-container {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        #filters-container h5,
+        #product-container h5 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        #filters-container .form-label,
+        #product-container .form-label {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        #filters-container .btn-outline-secondary,
+        #product-container .btn-outline-secondary {
+            margin-bottom: 10px;
+            width: 120px;
+            text-align: left;
+        }
+        
+        #filters-container .btn-outline-secondary:hover,
+        #product-container .btn-outline-secondary:hover {
+            background-color: #ffffff;
+        }
+        
+        /* Estilos específicos para #filters-container */
+        #filters-container {
+            /* Estilos adicionales para el contenedor de filtros */
+            max-width: 300px; /* Ancho máximo para el contenedor de filtros */
+            height: 100vh; /* Altura completa de la ventana */
+            overflow-y: auto; /* Permitir desplazamiento vertical */
+        }
+        
+        #filters-container h5 {
+            color: #333; /* Color personalizado para el título */
+        }
+        
+        #filters-container .form-label {
+            color: #555; /* Color personalizado para las etiquetas */
+        }
+        
+        #filters-container .btn-outline-secondary {
+            background-color: #fff; /* Fondo blanco para los botones */
+            border-color: #dee2e6; /* Color del borde */
+        }
+        
+        #filters-container .btn-outline-secondary:hover {
+            background-color: #e9ecef; /* Color de fondo al hacer hover */
+            border-color: #ced4da; /* Color del borde al hacer hover */
+        }
+        
+        /* Estilos específicos para #product-container */
+        #product-container {
+            margin-left: 20px; /* Espacio entre filtros y productos */
+        }
+        
+        #product-container h5 {
+            color: #000; /* Color personalizado para el título */
+        }
+        
+        #product-container .form-label {
+            color: #444; /* Color personalizado para las etiquetas */
+        }
+        
+        #product-container .btn-outline-secondary {
+            background-color: #f8f9fa; /* Fondo gris claro para los botones */
+            border-color: #ccc; /* Color del borde */
+        }
+        
+        #product-container .btn-outline-secondary:hover {
+            background-color: #e2e6ea; /* Color de fondo al hacer hover */
+            border-color: #adb5bd; /* Color del borde al hacer hover */
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 200px; /* Ancho máximo para las tarjetas */
+            margin: 10px; /* Espacio entre tarjetas */
+            overflow: hidden; /* Evita que el contenido se desborde */
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+        }
+        
+        .card-img-top {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
+            height: 150px; /* Altura fija para las imágenes */
+            object-fit: cover; /* Ajusta la imagen para que cubra el espacio sin distorsionarse */
+        }
+        
+        .card-body {
+            padding: 15px; /* Más espacio interno */
+            text-align: left; /* Centra el contenido */
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333; /* Color más oscuro para el título */
+        }
+        
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 5px; /* Espacio entre el precio y el precio anterior */
+        }
+        
+        .card-text del {
+            color: #999;
+            font-size: 0.9rem; /* Tamaño más pequeño para el precio anterior */
+        }
+    
+        .simple-accordion .accordion-item {
+            border: none;
+            /* Eliminar borde */
+        }
+    
+        .simple-accordion .accordion-button {
+            background-color: transparent;
+            /* Fondo transparente */
+            color: #000;
+            /* Color del texto */
+            border: none;
+            /* Eliminar borde */
+            box-shadow: none;
+            /* Eliminar sombra */
+            padding: 0.5rem 1rem;
+            /* Ajustar padding */
+        }
+    
+        .simple-accordion .accordion-button:not(.collapsed) {
+            color: #000;
+            /* Color del texto */
+            background-color: transparent;
+            /* Fondo transparente */
+            box-shadow: none;
+            /* Eliminar sombra */
+        }
+    
+        .simple-accordion .accordion-body {
+            padding: 0.5rem 1rem;
+            /* Ajustar padding */
+        }
+    
+        .accordion-body {
+            display: block;
+            /* Asegúrate de que el contenido sea visible */
+            overflow: visible;
+            /* Evita que el contenido se oculte */
+            height: auto;
+            /* Asegúrate de que el contenido tenga altura automática */
+            z-index: 1000;
+        }
+    
+        .accordion-collapse {
+            transition: height 0.3s ease;
+            /* Asegúrate de que la transición sea suave */
+        }
+    
+        #container-tipoEnvio {
+        font-family: Arial, sans-serif;
+        }
+    
+        .envio-option {
+            margin-bottom: 20px;
+        }
+    
+        .envio-option button {
+            margin-bottom: 10px;
+        }
+    
+        .envio-option p {
+            margin: 5px 0;
+            font-size: 10px;
+            color: #555;
+        }

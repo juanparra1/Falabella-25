@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 # Create your views here.
 
@@ -11,7 +11,7 @@ def help(request):
 def register_view(request):
     if request.method == 'POST':
         # Lógica de registro
-        return redirect('inicio')
+        return redirect('core:index')  # Cambia 'core:index' por el nombre correcto de la ruta
     return render(request, 'partials/modals/register.html')
 
 class CustomLoginView(LoginView):
