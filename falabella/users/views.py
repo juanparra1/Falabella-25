@@ -9,6 +9,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from .serializers import ForgotPasswordSerializer, ChangePasswordSerializer, ResetPasswordSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import CustomObtainPairSerializer
 
 
 User  = get_user_model()
@@ -133,3 +135,9 @@ class UserProfileView(APIView):
         user.email = request.data.get('email', user.email)
         user.save()
         return Response({'message': 'Profile updated successfully'})
+    
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomObtainPairSerializer
+    #Permite obtener token de acceso y refresco
+
+    

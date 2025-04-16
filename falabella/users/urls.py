@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import UserListCreateView, UserDetailView, ChangePasswordView, ForgotPasswordView, ResetPasswordView, AddressListCreateView, AddressDetailView, UserProfileView
-
+from .views import UserListCreateView, UserDetailView, ChangePasswordView, ForgotPasswordView, ResetPasswordView, AddressListCreateView, AddressDetailView, UserProfileView, CustomTokenObtainPairView
 urlpatterns = [
     path('register/',UserListCreateView.as_view(),name='register'),
     path('users/<int:pk>/',UserDetailView.as_view(),name='user-detail'),
@@ -10,4 +9,5 @@ urlpatterns = [
     path("addresses/", AddressListCreateView.as_view(), name="address-list-create"),
     path("addresses/<int:pk>/", AddressDetailView.as_view(), name="address-detail"),
     path("profile/", UserProfileView.as_view(), name="user-profile"),
+    path("api/token/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
 ]
