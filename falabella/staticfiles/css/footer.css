@@ -1,0 +1,105 @@
+/* Footer Container */
+footer {
+    background-color: #00274d;
+    color: #ffffff;
+    padding: 3rem 0;
+    margin-top: 3rem;
+}
+
+/* Footer Links */
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: rgb(6, 42, 59);
+    text-decoration: underline;
+}
+
+/* Footer Columns */
+footer .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+footer .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Footer Headings */
+footer h5 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Footer Lists */
+footer ul {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+footer ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Footer Bottom Section */
+footer .mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+footer .col-12.text-center {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Footer Text Styles */
+footer .text-muted {
+    color: #6c757d !important;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    footer .col-md-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    footer .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    footer {
+        padding: 2rem 0;
+    }
+}
+
+/* Text Decoration Utilities */
+.text-decoration-none {
+    text-decoration: none !important;
+}
+
+.text-decoration-underline {
+    text-decoration: underline !important;
+}
+
+/* Additional Link Styling */
+footer a.text-decoration-underline:hover {
+    text-decoration: underline !important;
+}

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include,re_path
-
+import os
 from core.views import index, help
 from django.urls import include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -28,6 +28,7 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from core.views import index, help
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from falabella.settings import BASE_DIR  # Importa BASE_DIR desde settings.py
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -60,4 +61,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
