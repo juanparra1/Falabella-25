@@ -323,7 +323,7 @@ button[data-bs-toggle="offcanvas"] strong {
 
 /* Offcanvas Header */
 .offcanvas-header {
-    background-color: #f1f1f1;
+    background-color: #fffdfd;
     position: relative;
     padding-top: 1rem;
 }

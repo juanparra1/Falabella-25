@@ -28,11 +28,12 @@
 
                 <!-- ... después del campo de contraseña y antes del botón Ingresar ... -->
                 <div class="text-start mb-3">
-                    <a href="#" class=" " 
-                        style="font-size: 14px; text-decoration: none;"
-                        data-bs-toggle="modal" 
-                        data-bs-target="#recoveryModal">
-                        ¿Olvidaste tu contraseña? No te preocupes, pide un código verificador por <u>correo</u> o <u>SMS</u> para cambiar tu contraseña.
+                    <a href="#" style="font-size: 14px; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#emailRecoveryModal">
+                        ¿Olvidaste tu contraseña? No te preocupes, pide un código verificador por 
+                        <u id="recoveryByEmail" style="cursor: pointer;">correo</u> o 
+                    </a>
+                    <a href="#" style="font-size: 14px; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#smsRecoveryModal">
+                        <u id="recoveryBySMS" style="cursor: pointer;">SMS</u> para cambiar tu contraseña.
                     </a>
                 </div>
 
