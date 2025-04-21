@@ -58,3 +58,63 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('El botón de registro no se encontró en el DOM.');
     }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.querySelector("input[name='password']");
+    const minLength = document.getElementById("minLength");
+    const hasNumber = document.getElementById("hasNumber");
+    const hasUppercase = document.getElementById("hasUppercase");
+    const hasLowercase = document.getElementById("hasLowercase");
+    const noSpaces = document.getElementById("noSpaces");
+    const noSpecialChars = document.getElementById("noSpecialChars");
+
+    passwordInput.addEventListener("input", function () {
+        const value = passwordInput.value;
+
+        // Validar longitud mínima
+        if (value.length >= 8) {
+            minLength.style.color = "green";
+        } else {
+            minLength.style.color = "#000000";
+        }
+
+        // Validar si contiene al menos un número
+        if (/\d/.test(value)) {
+            hasNumber.style.color = "green";
+        } else {
+            hasNumber.style.color = "#000000";
+        }
+
+        // Validar si contiene al menos una mayúscula
+        if (/[A-Z]/.test(value)) {
+            hasUppercase.style.color = "green";
+        } else {
+            hasUppercase.style.color = "#000000";
+        }
+
+        // Validar si contiene al menos una minúscula
+        if (/[a-z]/.test(value)) {
+            hasLowercase.style.color = "green";
+        } else {
+            hasLowercase.style.color = "#000000";
+        }
+
+        // Validar si no contiene espacios
+        if (!/\s/.test(value)) {
+            noSpaces.style.color = "green";
+        } else {
+            noSpaces.style.color = "#000000";
+        }
+
+        // Validar si no contiene caracteres especiales prohibidos
+        if (!/['\\¡¿"ºª·`´çñÑ]/.test(value)) {
+            noSpecialChars.style.color = "green";
+        } else {
+            noSpecialChars.style.color = "#000000";
+        }
+    });
+
+    passwordInput.addEventListener("input", function () {
+        console.log("Valor actual de la contraseña:", passwordInput.value);
+    });
+});

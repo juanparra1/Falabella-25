@@ -15,99 +15,110 @@
                 <div class="col-md-12">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-4">
-                            <div class="row">
+                            <div class="d-flex justify-content-between align-items-start">
                                 <!-- Columna del formulario -->
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     <h4 class="text-label mb-2">Inicia sesión o regístrate para comprar</h4>
                                     <p class="text-muted mb-4" style="font-size: 14px;">Ingresa tus datos personales y disfruta de una experiencia de compra más rápida.</p>
                                     
                                     <form id="registrationForm">
                                         {% csrf_token %}
+                                        <!-- Campos del formulario -->
                                         <div class="mb-3">
                                             <label class="form-label">Correo</label>
-                                            <div class="position-relative col-md-10">
-                                                <input type="text" class="form-control border-0 border-bottom rounded-0" name="email" placeholder="Ingresa un correo" style="box-shadow: none; background: transparent;padding-left: 0px;" required>
-                                            </div>
+                                            <input type="text" class="form-control border-0 border-bottom rounded-0" name="email" placeholder="Ingresa un correo" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Nombre</label>
-                                            <div class="position-relative col-md-10">
-                                                <input type="text" class="form-control border-0 border-bottom rounded-0" name="first_name" placeholder="Ingresa un nombre" style="box-shadow: none; background: transparent;padding-left: 0px;" required>
-                                            </div>
+                                            <input type="text" class="form-control border-0 border-bottom rounded-0" name="first_name" placeholder="Ingresa un nombre" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Apellidos</label>
-                                            <div class="position-relative col-md-10">
-                                                <input type="text" class="form-control border-0 border-bottom rounded-0" name="last_name" placeholder="Ingresa apellidos" style="box-shadow: none; background: transparent;padding-left: 0px;" required>
-                                            </div>
+                                            <input type="text" class="form-control border-0 border-bottom rounded-0" name="last_name" placeholder="Ingresa apellidos" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Tipo de documento</label>
-                                            <div class="position-relative col-md-10">
-                                                <strong class="position-absolute" style="top: 50%; transform: translateY(-50%); left: 0px;">CC</strong>
-                                                <input type="text" class="form-control border-0 border-bottom rounded-0" name="documento" placeholder="Ingresa una cedula" style="box-shadow: none; background: transparent; padding-left: 25px;" required>
-                                            </div>
+                                            <input type="text" class="form-control border-0 border-bottom rounded-0" name="documento" placeholder="Ingresa una cédula" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Celular</label>
-                                            <div class="position-relative col-md-10">
-                                                <strong class="position-absolute" style="top: 50%; transform: translateY(-50%); left: 0px;">+57</strong>
-                                                <input type="text" class="form-control border-0 border-bottom rounded-0" name="phone" placeholder="Ingresa un celular" style="box-shadow: none; background: transparent; padding-left: 40px;" required>
-                                            </div>
+                                            <input type="text" class="form-control border-0 border-bottom rounded-0" name="phone" placeholder="Ingresa un celular" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Contraseña</label>
-                                            <div class="position-relative col-md-10">
-                                                <input type="password" class="form-control border-0 border-bottom rounded-0" name="password" placeholder="Ingresa una contraseña" style="box-shadow: none; background: transparent; padding-left: 0px;" required>
+                                            <div class="position-relative">
+                                                <input type="password" class="form-control border-0 border-bottom rounded-0" name="password" placeholder="Ingresa una contraseña" required>
                                                 <button type="button" class="btn position-absolute end-0 top-50 translate-middle-y" onclick="togglePassword('registerPassword')" style="background: none; border: none;">
                                                     <i class="bi bi-eye-slash" id="toggleRegisterPassword"></i>
                                                 </button>
                                             </div>
-                                            <div class="mt-2">
-                                                <small class="text-muted">
-                                                    <div class="container p-0">
-                                                        <div class="row g-2">
-                                                            <div class="col-4">
-                                                                <div style="font-size: 10px; color: #000000; font-weight: bold;">• Mín. 8 caracteres</div>
-                                                                <div style="font-size: 10px; color: #000000; font-weight: bold;">• 1 número</div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div style="font-size: 10px; color: #000000; font-weight: bold;">• 1 mayúscula</div>
-                                                                <div style="font-size: 10px; color: #000000; font-weight: bold;">• 1 minúscula</div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div style="font-size: 10px; color: #000000; font-weight: bold;">• Sin espacio</div>
-                                                                <div style="font-size: 10px; color: #000000; font-weight: bold;">• Sin usar '\¡¿"ºª·`´çñÑ</div>
-                                                            </div>
+                                            <small class="text-muted">
+                                                <div class="container p-0">
+                                                    <div class="row g-2">
+                                                        <div class="col-4">
+                                                            <li id="minLength" style="color: #000;">Mín. 8 caracteres</li>
+                                                            <li id="hasNumber" style="color: #000;">1 número</li>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <li id="hasUppercase" style="color: #000;">1 mayúscula</li>
+                                                            <li id="hasLowercase" style="color: #000;">1 minúscula</li>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <li id="noSpaces" style="color: #000;">Sin espacio</li>
+                                                            <li id="noSpecialChars" style="color: #000;">Sin usar caracteres especiales</li>
                                                         </div>
                                                     </div>
-                                                </small>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Confirmar Contraseña</label>
-                                            <input type="password" class="form-control border-0 border-bottom rounded-0" name="confirm_password" placeholder="Confirma tu contraseña" required>
+                                                </div>
+                                            </small>
                                         </div>
                                         <div class="mb-3">
                                             <input class="form-check-input" type="checkbox" id="cmrPuntosCheck" required>
-                                            <label class="form-check-label" for="cmrPuntosCheck">Quiero acumular CMR Puntos en mis compras.</label>
+                                            <label class="form-check-label" for="cmrPuntosCheck">Quiero acumular CMR Puntos en mis compras según el reglamento del programa y autorizo el tratamiento de mis datos personales.</label>
                                         </div>
                                         <div class="mb-3">
                                             <input class="form-check-input" type="checkbox" id="terminosCheck" required>
-                                            <label class="form-check-label" for="terminosCheck">Acepto los términos y condiciones.</label>
+                                            <label class="form-check-label" for="terminosCheck">Acepto los términos y condiciones de falabella.com y autorizo el tratamiento de mis datos personales.</label>
                                         </div>
-                                        <button type="button" id="btnRegistro" class="btn btn-primary w-100">Registrate</button>
+                                        <button type="submit" class="btn btn-primary w-100">Regístrate</button>
+                                        <div class="mb-3" justify-content="center">
+                                            <label class="form-check-label" for="terminosCheck">¿ya tienes una cuenta?</label>
+                                            <u id="iniciosesion" style="cursor: pointer;">inicia sesión.</u>
+                                        </div>
                                     </form>
                                 </div>
-                                
+
                                 <!-- Columna de beneficios -->
-                                <div class="col-md-5">
+                                <div class="col-md-5 text-start">
                                     <h5 class="mb-4">Beneficios falabella.com</h5>
                                     <ul class="list-unstyled">
-                                        <li>Recibir notificaciones en tiempo real</li>
-                                        <li>Revisar boletas online</li>
-                                        <li>Guardar medios de pago y direcciones favoritas</li>
-                                        <li>Ser parte de CMR puntos</li>
+                                        <li class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-bell me-2" style="font-size: 24px; color: #000;"></i>
+                                            <span><strong>Recibir notificaciones en tiempo real</strong> de tus pedidos.</span>
+                                        </li>
+                                        <li class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-file-earmark-text me-2" style="font-size: 24px; color: #000;"></i>
+                                            <span><strong>Revisar tus boletas online.</strong></span>
+                                        </li>
+                                        <li class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-star me-2" style="font-size: 24px; color: #000;"></i>
+                                            <span><strong>Guardar medios de pago y direcciones favoritas.</strong></span>
+                                        </li>
+                                        <li class="d-flex align-items-center mb-3">
+                                            <img src="{% static 'images/cmr-puntos.png' %}" alt="CMR Puntos" style="width: 24px; height: 24px;" class="me-2">
+                                            <span><strong>Ser parte de CMR puntos,</strong> el mejor programa de beneficios.</span>
+                                        </li>
+                                    </ul>
+                                    <hr style="border: 2px solid; background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);">
+                                    <h5 class="mt-4">Beneficios CMR Puntos</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-gift me-2" style="font-size: 24px; color: #000;"></i>
+                                            <span><strong>Canje</strong> de productos, experiencias, viajes y Gift Cards.</span>
+                                        </li>
+                                        <li class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-tags me-2" style="font-size: 24px; color: #000;"></i>
+                                            <span><strong>Promociones</strong> especiales, cupones de descuento y más.</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
