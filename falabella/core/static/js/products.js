@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function setupDynamicProducts() {
     const carousel = document.getElementById('carouselExampleIndicators');
-    const productContainer = document.getElementById('product-container');
-    const filtersContainer = document.getElementById('filters-container');
+    const mostSoldCarousels = document.querySelectorAll('.container-md.py-7'); // Selecciona los contenedores de "Most Sold"
     const inlineRegisterForm = document.getElementById('inlineRegisterForm');
 
     // Manejo del enlace de registro
@@ -15,7 +14,13 @@ function setupDynamicProducts() {
         const registerLink = event.target.closest('#registerLink');
         if (registerLink) {
             event.preventDefault();
+            // Oculta el carrusel principal
             carousel.style.display = 'none';
+            // Oculta los carruseles de "Most Sold"
+            mostSoldCarousels.forEach(carousel => {
+                carousel.style.display = 'none';
+            });
+            // Muestra el formulario de registro
             inlineRegisterForm.style.display = 'block';
             inlineRegisterForm.scrollIntoView({ behavior: 'smooth' });
         }
@@ -28,9 +33,6 @@ function setupDynamicProducts() {
             event.preventDefault();
             const category = this.getAttribute('data-category');
             loadProducts(category);
-            filtersContainer.style.display = 'block';
-            productContainer.style.display = 'block';
-            productContainer.scrollIntoView({ behavior: 'smooth' });
         });
     });
 }
