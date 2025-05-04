@@ -1,6 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
     const btnRegistro = document.getElementById('btnRegistro');
 
+    function setupDynamicProducts() {
+        const carousel = document.getElementById('carouselExampleIndicators');
+        const mostSoldCarousels = document.querySelectorAll('.container-md.py-7'); // Selecciona los contenedores de "Most Sold"
+        const inlineRegisterForm = document.getElementById('inlineRegisterForm');
+    
+        // Manejo del enlace de registro
+        document.addEventListener('click', function (event) {
+            const registerLink = event.target.closest('#registerLink');
+            if (registerLink) {
+                event.preventDefault();
+                // Oculta el carrusel principal
+                carousel.style.display = 'none';
+                // Oculta los carruseles de "Most Sold"
+                mostSoldCarousels.forEach(carousel => {
+                    carousel.style.display = 'none';
+                });
+                // Muestra el formulario de registro
+                inlineRegisterForm.style.display = 'block';
+                inlineRegisterForm.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    
+        // Manejo de los enlaces de categorías
+        const categoryLinks = document.querySelectorAll('.category-link');
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const category = this.getAttribute('data-category');
+                loadProducts(category);
+            });
+        });
+    }
+    
     if (btnRegistro) {
         btnRegistro.addEventListener('click', function (event) {
             event.preventDefault();

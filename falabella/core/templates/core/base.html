@@ -31,6 +31,7 @@
         <link rel="stylesheet" href="{% static 'css/filters_list.css' %}">
         <link rel="stylesheet" href="{% static 'css/register.css' %}">
         <link rel="stylesheet" href="{% static 'css/sold_carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'css/cart.css' %}">
         
         {% block extra_css %}{% endblock %}
     </head>
@@ -71,7 +72,8 @@
             {% include 'partials/modals/register.html' %}
             {% include 'partials/modals/rec_correo.html' %}
             {% include 'partials/modals/rec_sms.html' %}
-            
+            {% include 'partials/modals/car.html' %}
+
             <!-- Footer -->
             {% include 'partials/footer.html' %}
         </div>
@@ -97,6 +99,7 @@
         <script src="{% static 'js/rec_correo.js' %}"></script>
         <script src="{% static 'js/rec_sms.js' %}"></script>
         <script src="{% static 'js/register.js' %}"></script>
+        <script src="{% static 'js/cart.js' %}"></script>
         
         {% block extra_js %}{% endblock %}
     </body>

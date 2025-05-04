@@ -4,38 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     setupDynamicProducts();
 });
 
-function setupDynamicProducts() {
-    const carousel = document.getElementById('carouselExampleIndicators');
-    const mostSoldCarousels = document.querySelectorAll('.container-md.py-7'); // Selecciona los contenedores de "Most Sold"
-    const inlineRegisterForm = document.getElementById('inlineRegisterForm');
-
-    // Manejo del enlace de registro
-    document.addEventListener('click', function (event) {
-        const registerLink = event.target.closest('#registerLink');
-        if (registerLink) {
-            event.preventDefault();
-            // Oculta el carrusel principal
-            carousel.style.display = 'none';
-            // Oculta los carruseles de "Most Sold"
-            mostSoldCarousels.forEach(carousel => {
-                carousel.style.display = 'none';
-            });
-            // Muestra el formulario de registro
-            inlineRegisterForm.style.display = 'block';
-            inlineRegisterForm.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-
-    // Manejo de los enlaces de categorías
-    const categoryLinks = document.querySelectorAll('.category-link');
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const category = this.getAttribute('data-category');
-            loadProducts(category);
-        });
-    });
-}
 
 // Función para cargar productos desde la API
 function loadProducts(category) {
@@ -76,7 +44,7 @@ function displayProducts(products) {
                         <strong>${formatCurrency(product.price)}</strong>
                         ${product.oldPrice ? `<del>${formatCurrency(product.oldPrice)}</del>` : ''}
                     </p>
-                    <button class="btn btn-dark w-100 rounded-pill">Agregar al carro</button>
+                    <button class="btn btn-dark w-100 rounded-pill" onclick="addToCart(${encodeURIComponent(JSON.stringify(product))})">Agregar al carro</button>
                 </div>
             </div>
         `;
@@ -96,4 +64,39 @@ function formatCurrency(value) {
         style: 'currency',
         currency: 'CLP'
     }).format(value);
+}
+
+// Función para agregar productos al carrito
+function addToCart(productData) {
+    const product = JSON.parse(decodeURIComponent(productData));
+
+    // Obtener el carrito desde localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(item => item.id === product.id);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1; // Incrementar cantidad si ya existe
+    } else {
+        product.quantity = 1; // Agregar nueva propiedad de cantidad
+        cart.push(product); // Agregar producto al carrito
+    }
+
+    // Guardar carrito actualizado en localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Actualizar el contador del carrito en el DOM
+    updateCartCounter();
+
+    alert(`${product.name} se agregó al carrito.`);
+}
+
+// Función para actualizar el contador del carrito
+function updateCartCounter() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCounter = cart.reduce((total, item) => total + item.quantity, 0);
+
+    const navbarCounter = document.querySelector(".bi-cart3 + .badge");
+    if (navbarCounter) {
+        navbarCounter.textContent = cartCounter;
+    }
 }
