@@ -44,7 +44,7 @@ function displayProducts(products) {
                         <strong>${formatCurrency(product.price)}</strong>
                         ${product.oldPrice ? `<del>${formatCurrency(product.oldPrice)}</del>` : ''}
                     </p>
-                    <button class="btn btn-dark w-100 rounded-pill" onclick="addToCart(${encodeURIComponent(JSON.stringify(product))})">Agregar al carro</button>
+                    <button class="btn btn-dark w-100 rounded-pill" onclick="addToCart('${encodeURIComponent(JSON.stringify(product))}')">Agregar al carro</button>
                 </div>
             </div>
         `;

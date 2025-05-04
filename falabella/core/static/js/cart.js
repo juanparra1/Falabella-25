@@ -34,7 +34,8 @@ function renderProducts() {
 
   // Actualizar cantidad de productos
 function updateQuantity(change, productId) {
-    const product = products.find((p) => p.id === productId);
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const product = cart.find((p) => p.id === productId);
     if (!product) return;
 
     // Evitar cantidades negativas
@@ -42,14 +43,15 @@ function updateQuantity(change, productId) {
 
     product.quantity += change;
 
+    // Guardar carrito actualizado en localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
     // Actualizar cantidad en el DOM
     document.getElementById(`quantity-${productId}`).textContent = product.quantity;
 
     // Actualizar totales
-    cartCounter += change;
-    totalPrice += change * product.price;
-
     updateSummary();
+    updateCartCounter();
 }
 
   // Actualizar resumen del carrito
@@ -87,8 +89,9 @@ function closeCarouselsAndShowCart() {
 function showCartModal() {
     const cartModal = document.getElementById("cart-modal");
     if (cartModal) {
-        cartModal.style.display = "block"; // Mostrar el modal
-        cartModal.scrollIntoView({ behavior: "smooth" }); // Desplazar la vista al modal
+        cartModal.style.display = "block";
+        renderProducts(); // Asegúrate de renderizar los productos
+        cartModal.scrollIntoView({ behavior: "smooth" });
     }
 }
 
@@ -114,34 +117,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para agregar productos al carrito
 function addToCart(productData) {
-    const product = JSON.parse(decodeURIComponent(productData));
+    try {
+        const product = JSON.parse(decodeURIComponent(productData));
+        
+        // Obtener el carrito desde localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingProduct = cart.find(item => item.id === product.id);
 
-    // Obtener el carrito desde localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existingProduct = cart.find(item => item.id === product.id);
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+        } else {
+            product.quantity = 1;
+            cart.push(product);
+        }
 
-    if (existingProduct) {
-        existingProduct.quantity += 1; // Incrementar cantidad si ya existe
-    } else {
-        product.quantity = 1; // Agregar nueva propiedad de cantidad
-        cart.push(product); // Agregar producto al carrito
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCounter();
+        renderProducts(); // Añade esta línea para actualizar la vista del carrito
+        
+        alert(`${product.name} se agregó al carrito.`);
+    } catch (error) {
+        console.error('Error al agregar al carrito:', error);
     }
-
-    // Guardar carrito actualizado en localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    // Actualizar el contador del carrito en el DOM
-    updateCartCounter();
-
-    alert(`${product.name} se agregó al carrito.`);
 }
+
+// Asegúrate de que la función sea global
+window.addToCart = addToCart;
 
 // Función para actualizar el contador del carrito
 function updateCartCounter() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartCounter = cart.reduce((total, item) => total + item.quantity, 0);
 
-    const navbarCounter = document.querySelector(".bi-cart3 + .badge");
+    const navbarCounter = document.getElementById("cart-counter");
     if (navbarCounter) {
         navbarCounter.textContent = cartCounter;
     } else {
