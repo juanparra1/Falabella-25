@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (emailRecoveryForm) {
         emailRecoveryForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            // Lógica específica para el formulario de recuperación por correo
             const email = this.querySelector('input[type="email"]').value;
 
             if (email && email.includes('@')) {

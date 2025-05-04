@@ -29,10 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const code = this.querySelector('input[type="text"]').value;
             const newPassword = this.querySelector('input[type="password"]').value;
 
-            // Validación más completa
-            const isValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\s]{8,}$/.test(newPassword);
-            
-            if (code && isValid) {
+            if (code && newPassword.length >= 8) {
                 fetch('/api/reset_password/', {
                     method: 'POST',
                     headers: {
@@ -51,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(error => console.error('Error:', error));
             } else {
-                alert('Por favor, completa todos los campos correctamente y asegúrate de que la contraseña cumpla con todos los requisitos.');
+                alert('Por favor, completa todos los campos correctamente.');
             }
         });
     }

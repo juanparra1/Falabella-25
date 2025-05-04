@@ -8,12 +8,17 @@ function setupLoginAndRegistration() {
         const loginLink = event.target.closest('#loginLink');
         if (loginLink) {
             event.preventDefault();
-            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-            loginModal.show();
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            if (!loginModal) {
+                const newLoginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                newLoginModal.show();
+            }
         }
     });
 
-    document.querySelector('form').addEventListener('submit', function (event) {
+    const loginForm = document.querySelector('#loginModal form');
+    if (loginForm) {
+    loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
         const formData = {
@@ -41,10 +46,10 @@ function setupLoginAndRegistration() {
                 if (data) {
                     localStorage.setItem('access_token', data.access);
                     localStorage.setItem('refresh_token', data.refresh);
-                    alert('Inicio de sesión exitoso.');
+                    console.log('Inicio de sesión exitoso. Redirigiendo...');
                     window.location.href = '/'; // Redirige a la página principal
                 }
             })
             .catch(error => console.error('Error:', error));
     });
-}
+}}
