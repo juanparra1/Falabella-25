@@ -117,28 +117,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para agregar productos al carrito
 function addToCart(productData) {
-    try {
-        const product = JSON.parse(decodeURIComponent(productData));
-        
-        // Obtener el carrito desde localStorage
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingProduct = cart.find(item => item.id === product.id);
+    const product = JSON.parse(decodeURIComponent(productData));
 
-        if (existingProduct) {
-            existingProduct.quantity += 1;
-        } else {
-            product.quantity = 1;
-            cart.push(product);
-        }
+    // Obtener el carrito desde localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(item => item.id === product.id);
 
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCounter();
-        renderProducts(); // Añade esta línea para actualizar la vista del carrito
-        
-        alert(`${product.name} se agregó al carrito.`);
-    } catch (error) {
-        console.error('Error al agregar al carrito:', error);
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        product.quantity = 1;
+        cart.push(product);
     }
+
+    // Guardar carrito actualizado en localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Actualizar el contador del carrito en el DOM
+    updateCartCounter();
+    renderProducts(); // Actualizar la vista del carrito si es necesario
 }
 
 // Asegúrate de que la función sea global
