@@ -1,5 +1,5 @@
+// Actualización en rec_correo.js (similar para rec_sms.js)
 document.addEventListener('DOMContentLoaded', function() {
-    // Función para obtener el token CSRF
     function getCSRFToken() {
         const cookieValue = document.cookie
             .split('; ')
@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return cookieValue || '';
     }
 
-    // Manejar el envío del formulario de recuperación por correo
     const emailRecoveryForm = document.getElementById('emailRecoveryForm');
     if (emailRecoveryForm) {
+        // Manejar el envío del formulario
         emailRecoveryForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const email = this.querySelector('input[type="email"]').value;
@@ -20,32 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken(), // Agregar el token CSRF
+                        'X-CSRFToken': getCSRFToken(),
                     },
                     body: JSON.stringify({ email }),
                 })
                 .then(response => {
                     if (response.ok) {
-                        alert('Se ha enviado un código de verificación a tu correo electrónico');
-                        // Cambiar el contenido del modal para ingresar el código
-                        const modalBody = this.closest('.modal-body');
-                        modalBody.innerHTML = `
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-12">
-                                        <h4 class="text-label mb-3">Verificación</h4>
-                                        <p class="text-muted mb-4">Ingresa el código de verificación enviado a tu correo</p>
-                                        <form id="verificationForm">
-                                            <div class="mb-3">
-                                                <label class="form-label">Código de verificación</label>
-                                                <input type="text" class="form-control" placeholder="Ingresa el código" required>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Verificar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                        // Cerrar el modal actual y abrir el de cambio de contraseña
+                        const emailModal = bootstrap.Modal.getInstance(document.getElementById('emailRecoveryModal'));
+                        emailModal.hide();
+                        
+                        const cambioContraModal = new bootstrap.Modal(document.getElementById('cambioContraModal'));
+                        cambioContraModal.show();
+                        
+                        // Opcional: Mostrar el email en el modal de cambio de contraseña
+                        document.querySelector('#cambioContraModal .modal-body').insertAdjacentHTML('afterbegin', 
+                            `<p class="text-muted">Correo electrónico: ${email}</p>`);
                     } else {
                         alert('Error al enviar el correo. Inténtalo de nuevo.');
                     }
@@ -55,5 +45,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Por favor, ingresa un correo electrónico válido');
             }
         });
+
+        // Manejar el enlace "Ya tengo código verificador"
+        const tieneCodigoLink = emailRecoveryForm.querySelector('a[data-bs-toggle="modal"]');
+        if (tieneCodigoLink) {
+            tieneCodigoLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const emailModal = bootstrap.Modal.getInstance(document.getElementById('emailRecoveryModal'));
+                emailModal.hide();
+                
+                const cambioContraModal = new bootstrap.Modal(document.getElementById('cambioContraModal'));
+                cambioContraModal.show();
+            });
+        }
     }
 });
