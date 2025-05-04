@@ -7,6 +7,10 @@ function renderProducts() {
     productList.innerHTML = ""; // Limpiar contenido previo
 
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (!Array.isArray(cart)) {
+        console.error("El carrito no es un array válido.");
+        return;
+    }
 
     cart.forEach((product) => {
         const productHTML = `
@@ -35,6 +39,10 @@ function renderProducts() {
   // Actualizar cantidad de productos
 function updateQuantity(change, productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (!Array.isArray(cart)) {
+        console.error("El carrito no es un array válido.");
+        return;
+    }
     const product = cart.find((p) => p.id === productId);
     if (!product) return;
 
@@ -57,6 +65,10 @@ function updateQuantity(change, productId) {
   // Actualizar resumen del carrito
 function updateSummary() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (!Array.isArray(cart)) {
+        console.error("El carrito no es un array válido.");
+        return;
+    }
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     const totalPrice = cart.reduce((total, item) => total + item.quantity * item.price, 0);
 
@@ -121,6 +133,10 @@ function addToCart(productData) {
 
     // Obtener el carrito desde localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (!Array.isArray(cart)) {
+        console.error("El carrito no es un array válido.");
+        return;
+    }
     const existingProduct = cart.find(item => item.id === product.id);
 
     if (existingProduct) {
@@ -144,6 +160,10 @@ window.addToCart = addToCart;
 // Función para actualizar el contador del carrito
 function updateCartCounter() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (!Array.isArray(cart)) {
+        console.error("El carrito no es un array válido.");
+        return;
+    }
     const cartCounter = cart.reduce((total, item) => total + item.quantity, 0);
 
     const navbarCounter = document.getElementById("cart-counter");
@@ -152,4 +172,14 @@ function updateCartCounter() {
     } else {
         console.error("No se encontró el contador del carrito en el DOM.");
     }
+}
+
+const selectAll = document.getElementById("selectAll");
+if (selectAll) {
+    selectAll.addEventListener("change", function (e) {
+        const checkboxes = document.querySelectorAll(".form-check-input");
+        checkboxes.forEach((checkbox) => (checkbox.checked = e.target.checked));
+    });
+} else {
+    console.warn("El elemento #selectAll no se encontró en el DOM.");
 }
