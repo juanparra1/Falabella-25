@@ -1,20 +1,3 @@
-const products = [
-    {
-        id: 1,
-        name: "Juego de mesa UNO Cartas",
-        price: 24900,
-        quantity: 1,
-        image: "/static/img/uno.jpg",
-    },
-    {
-        id: 2,
-        name: "Hot Wheels Die Cast Vehículo de Juguete",
-        price: 32900,
-        quantity: 2,
-        image: "/static/img/hotwheels.jpg",
-    },
-];
-
 let cartCounter = 0;
 let totalPrice = 0;
 
@@ -71,16 +54,14 @@ function updateQuantity(change, productId) {
 
   // Actualizar resumen del carrito
 function updateSummary() {
-    document.getElementById("product-count").textContent = cartCounter;
-    document.getElementById("total-items").textContent = cartCounter;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    const totalPrice = cart.reduce((total, item) => total + item.quantity * item.price, 0);
+
+    document.getElementById("product-count").textContent = totalItems;
+    document.getElementById("total-items").textContent = totalItems;
     document.getElementById("total-products").textContent = `$${totalPrice.toLocaleString()}`;
     document.getElementById("total-price").textContent = `$${totalPrice.toLocaleString()}`;
-
-    // Actualizar contador en el navbar
-    const navbarCounter = document.querySelector(".bi-cart3 + .badge");
-    if (navbarCounter) {
-        navbarCounter.textContent = cartCounter;
-    }
 }
 
 // Función para ocultar carruseles y mostrar el carrito
@@ -130,3 +111,40 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// Función para agregar productos al carrito
+function addToCart(productData) {
+    const product = JSON.parse(decodeURIComponent(productData));
+
+    // Obtener el carrito desde localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(item => item.id === product.id);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1; // Incrementar cantidad si ya existe
+    } else {
+        product.quantity = 1; // Agregar nueva propiedad de cantidad
+        cart.push(product); // Agregar producto al carrito
+    }
+
+    // Guardar carrito actualizado en localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Actualizar el contador del carrito en el DOM
+    updateCartCounter();
+
+    alert(`${product.name} se agregó al carrito.`);
+}
+
+// Función para actualizar el contador del carrito
+function updateCartCounter() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCounter = cart.reduce((total, item) => total + item.quantity, 0);
+
+    const navbarCounter = document.querySelector(".bi-cart3 + .badge");
+    if (navbarCounter) {
+        navbarCounter.textContent = cartCounter;
+    } else {
+        console.error("No se encontró el contador del carrito en el DOM.");
+    }
+}

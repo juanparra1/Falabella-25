@@ -66,37 +66,3 @@ function formatCurrency(value) {
     }).format(value);
 }
 
-// Función para agregar productos al carrito
-function addToCart(productData) {
-    const product = JSON.parse(decodeURIComponent(productData));
-
-    // Obtener el carrito desde localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existingProduct = cart.find(item => item.id === product.id);
-
-    if (existingProduct) {
-        existingProduct.quantity += 1; // Incrementar cantidad si ya existe
-    } else {
-        product.quantity = 1; // Agregar nueva propiedad de cantidad
-        cart.push(product); // Agregar producto al carrito
-    }
-
-    // Guardar carrito actualizado en localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    // Actualizar el contador del carrito en el DOM
-    updateCartCounter();
-
-    alert(`${product.name} se agregó al carrito.`);
-}
-
-// Función para actualizar el contador del carrito
-function updateCartCounter() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartCounter = cart.reduce((total, item) => total + item.quantity, 0);
-
-    const navbarCounter = document.querySelector(".bi-cart3 + .badge");
-    if (navbarCounter) {
-        navbarCounter.textContent = cartCounter;
-    }
-}
