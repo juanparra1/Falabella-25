@@ -1,39 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const btnRegistro = document.getElementById('btnRegistro');
-
-    function setupDynamicProducts() {
+    // Función para mostrar el formulario de registro
+    function showRegisterForm() {
         const carousel = document.getElementById('carouselExampleIndicators');
-        const mostSoldCarousels = document.querySelectorAll('.container-md.py-7'); // Selecciona los contenedores de "Most Sold"
+        const mostSoldCarousels = document.querySelectorAll('.container-md.py-7');
         const inlineRegisterForm = document.getElementById('inlineRegisterForm');
-    
-        // Manejo del enlace de registro
-        document.addEventListener('click', function (event) {
-            const registerLink = event.target.closest('#registerLink');
-            if (registerLink) {
-                event.preventDefault();
-                // Oculta el carrusel principal
-                carousel.style.display = 'none';
-                // Oculta los carruseles de "Most Sold"
-                mostSoldCarousels.forEach(carousel => {
-                    carousel.style.display = 'none';
-                });
-                // Muestra el formulario de registro
-                inlineRegisterForm.style.display = 'block';
-                inlineRegisterForm.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    
-        // Manejo de los enlaces de categorías
-        const categoryLinks = document.querySelectorAll('.category-link');
-        categoryLinks.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                const category = this.getAttribute('data-category');
-                loadProducts(category);
-            });
-        });
+
+        if (carousel) carousel.style.display = 'none';
+        mostSoldCarousels.forEach(c => c.style.display = 'none');
+        if (inlineRegisterForm) {
+            inlineRegisterForm.style.display = 'block';
+            inlineRegisterForm.scrollIntoView({ behavior: 'smooth' });
+            console.log('Formulario de registro mostrado');
+        } else {
+            console.error('El formulario de registro no se encontró en el DOM.');
+        }
     }
-    
+
+    // Delegación de eventos para el registerLink (dinámico o estático)
+    document.addEventListener('click', function (event) {
+        const registerLink = event.target.closest('#registerLink');
+        if (registerLink) {
+            event.preventDefault();
+            console.log('Enlace de registro clicado');
+            showRegisterForm();
+        }
+    });
+
+    const btnRegistro = document.getElementById('btnRegistro');
     if (btnRegistro) {
         btnRegistro.addEventListener('click', function (event) {
             event.preventDefault();

@@ -23,15 +23,11 @@
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
         <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-        <link rel="stylesheet" href="{% static 'css/modals.css' %}">
-        <link rel="stylesheet" href="{% static 'css/forms.css' %}">
-        <link rel="stylesheet" href="{% static 'css/products.css' %}">
         <link rel="stylesheet" href="{% static 'css/cart.css' %}">
         <link rel="stylesheet" href="{% static 'css/submenu.css' %}">
         <link rel="stylesheet" href="{% static 'css/filters_list.css' %}">
         <link rel="stylesheet" href="{% static 'css/register.css' %}">
         <link rel="stylesheet" href="{% static 'css/sold_carousel.css' %}">
-        <link rel="stylesheet" href="{% static 'css/cart.css' %}">
         
         {% block extra_css %}{% endblock %}
     </head>
@@ -73,6 +69,7 @@
             {% include 'partials/modals/rec_correo.html' %}
             {% include 'partials/modals/rec_sms.html' %}
             {% include 'partials/modals/car.html' %}
+            {% include 'partials/modals/cambio_contra.html' %}
 
             <!-- Footer -->
             {% include 'partials/footer.html' %}
@@ -86,12 +83,7 @@
                 crossorigin="anonymous"></script>
         
         <!-- JS personalizado -->
-        <script src="{% static 'js/utils.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
         <script src="{% static 'js/popovers.js' %}"></script>
-        <script src="{% static 'js/auth.js' %}"></script>
-        <script src="{% static 'js/products.js' %}"></script>
-        <script src="{% static 'js/cart.js' %}"></script>
         <script src="{% static 'js/products.js' %}"></script>
         <script src="{% static 'js/submenu.js' %}"></script>
         <script src="{% static 'js/modulos.js' %}"></script>
@@ -100,6 +92,7 @@
         <script src="{% static 'js/rec_sms.js' %}"></script>
         <script src="{% static 'js/register.js' %}"></script>
         <script src="{% static 'js/cart.js' %}"></script>
+        <script src="{% static 'js/cambio_contra.js' %}"></script>
         
         {% block extra_js %}{% endblock %}
     </body>
