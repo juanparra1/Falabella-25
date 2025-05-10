@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.response import Response
+from users.serializers import CustomObtainPairSerializer
+
 # Create your views here.
 
 def index(request):
@@ -16,3 +20,6 @@ def register_view(request):
 
 class CustomLoginView(LoginView):
     template_name = 'partials/modals/login.html'
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomObtainPairSerializer

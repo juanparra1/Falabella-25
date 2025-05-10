@@ -1,55 +1,94 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     setupLoginAndRegistration();
+    setupModalTriggers();
 });
 
-function setupLoginAndRegistration() {
-    // Login
-    document.addEventListener('click', function (event) {
-        const loginLink = event.target.closest('#loginLink');
-        if (loginLink) {
-            event.preventDefault();
-            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-            if (!loginModal) {
-                const newLoginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                newLoginModal.show();
-            }
+function setupModalTriggers() {
+    // Agregar evento de clic para el enlace de inicio de sesión
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'loginLink') {
+            e.preventDefault();
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
         }
     });
+}
 
+function setupLoginAndRegistration() {
     const loginForm = document.querySelector('#loginModal form');
     if (loginForm) {
-    loginForm.addEventListener('submit', function (event) {
-        event.preventDefault();
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+            };
 
-        const formData = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-        };
-
-        fetch('/api/token/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
+            fetch('/token/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+                body: JSON.stringify(formData),
+            })
             .then(response => {
                 if (response.ok) {
                     return response.json();
                 } else {
                     return response.json().then(data => {
-                        alert('Error en el inicio de sesión: ' + JSON.stringify(data));
+                        throw new Error(data.detail || 'Error en el inicio de sesión');
                     });
                 }
             })
             .then(data => {
                 if (data) {
+                    // Guardar datos en localStorage
                     localStorage.setItem('access_token', data.access);
                     localStorage.setItem('refresh_token', data.refresh);
-                    console.log('Inicio de sesión exitoso. Redirigiendo...');
-                    window.location.href = '/'; // Redirige a la página principal
+                    localStorage.setItem('user_name', data.first_name);
+                    
+                    // Actualizar la UI antes de cerrar el modal
+                    updateNavbarLoginState(data.first_name);
+                    
+                    // Cerrar el modal correctamente
+                    const modalElement = document.getElementById('loginModal');
+                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    
+                    // Primero eliminamos las clases y estilos que bloquean el scroll
+                    document.body.classList.remove('modal-open');
+                    document.body.style.removeProperty('overflow');
+                    document.body.style.removeProperty('padding-right');
+                    document.body.style.removeProperty('overflow-y');
+                    document.body.style.position = '';
+                    
+                    // Luego ocultamos el modal
+                    modalInstance.hide();
+                    
+                    // Removemos inmediatamente el backdrop
+                    const backdrop = document.querySelector('.modal-backdrop');
+                    if (backdrop) {
+                        backdrop.parentNode.removeChild(backdrop);
+                    }
+                    
+                    // Forzar el reflow del documento
+                    document.body.offsetHeight;
+                    
+                    // Asegurarnos de que el scroll esté habilitado
+                    document.body.style.overflow = 'auto';
+                    document.documentElement.style.overflow = 'auto';
+                    
+                    // Mostrar mensaje de éxito
+                    setTimeout(() => {
+                        alert('Inicio de sesión exitoso');
+                    }, 100);
                 }
             })
-            .catch(error => console.error('Error:', error));
-    });
-}}
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            });
+        });
+    }
+}
