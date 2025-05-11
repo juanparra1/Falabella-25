@@ -1,16 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Primero verificamos si hay una sesión activa antes de inicializar
     const userName = localStorage.getItem('user_name');
     const accessToken = localStorage.getItem('access_token');
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
-    // Solo inicializamos los popovers si no hay sesión activa
-    if (!userName || !accessToken) {
-        initializeTooltipsAndPopovers();
-    } else {
-        // Si hay sesión activa, actualizamos el estado con las opciones correctas
+    if (userName && accessToken && isLoggedIn === 'true') {
         updateNavbarLoginState(userName);
+    } else {
+        initializeTooltipsAndPopovers();
     }
-    
+
     // Manejar eventos de clic en los enlaces
     document.addEventListener('click', function(e) {
         // Manejar clic en enlace de inicio de sesión
@@ -99,6 +97,7 @@ function handleLogout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user_name');
+    sessionStorage.removeItem('isLoggedIn');
     
     // Actualizar UI al estado inicial
     const loginArea = document.getElementById('loginArea');
@@ -138,7 +137,7 @@ function updateNavbarLoginState(userName = null) {
     loginArea.querySelector('.fs-5').textContent = 'Hola,';
     loginArea.querySelector('.semi-bold-on-hover').textContent = userName || 'Inicia sesión';
 
-    // Crear nuevo popover con el contenido actualizado según el estado de la sesión
+    // Crear nuevo popover con el contenido actualizado
     const popover = new bootstrap.Popover(chevronIcon, {
         trigger: 'manual',
         placement: 'bottom',
@@ -154,12 +153,6 @@ function updateNavbarLoginState(userName = null) {
                     <li class="mb-3">
                         <a href="#" class="semi-bold-on-hover no-underline text-danger" id="logoutLink">
                             <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
-                        </a>
-                    </li>
-                    <hr class="my-2">
-                    <li class="mb-3">
-                        <a href="/cmr-puntos" class="semi-bold-on-hover no-underline">
-                            <i class="bi bi-credit-card me-2"></i>CMR Puntos
                         </a>
                     </li>
                 </ul>
@@ -188,7 +181,7 @@ function updateNavbarLoginState(userName = null) {
         `
     });
 
-    // Configurar eventos del nuevo popover
+    // Configurar eventos del popover
     loginArea.addEventListener('mouseover', () => {
         if (popover) popover.show();
     });

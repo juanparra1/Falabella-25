@@ -2,7 +2,17 @@ document.addEventListener('DOMContentLoaded', function() {
     setupLoginAndRegistration();
     setupModalTriggers();
     setupRecoveryLinks();
+    checkSessionStatus(); // Agregamos esta función
 });
+
+function checkSessionStatus() {
+    const userName = localStorage.getItem('user_name');
+    const accessToken = localStorage.getItem('access_token');
+    
+    if (userName && accessToken) {
+        updateNavbarLoginState(userName);
+    }
+}
 
 function setupModalTriggers() {
     // Agregar evento de clic para el enlace de inicio de sesión
@@ -49,37 +59,25 @@ function setupLoginAndRegistration() {
                     localStorage.setItem('access_token', data.access);
                     localStorage.setItem('refresh_token', data.refresh);
                     localStorage.setItem('user_name', data.first_name);
-                    
-                    // Actualizar la UI antes de cerrar el modal
+                    sessionStorage.setItem('isLoggedIn', 'true');
+
+                    // Actualizar UI
                     updateNavbarLoginState(data.first_name);
                     
                     // Cerrar el modal correctamente
                     const modalElement = document.getElementById('loginModal');
                     const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    modalInstance.hide();
                     
-                    // Primero eliminamos las clases y estilos que bloquean el scroll
+                    // Limpiar efectos del modal
                     document.body.classList.remove('modal-open');
                     document.body.style.removeProperty('overflow');
                     document.body.style.removeProperty('padding-right');
-                    document.body.style.removeProperty('overflow-y');
-                    document.body.style.position = '';
                     
-                    // Luego ocultamos el modal
-                    modalInstance.hide();
-                    
-                    // Removemos inmediatamente el backdrop
+                    // Eliminar backdrop
                     const backdrop = document.querySelector('.modal-backdrop');
-                    if (backdrop) {
-                        backdrop.parentNode.removeChild(backdrop);
-                    }
-                    
-                    // Forzar el reflow del documento
-                    document.body.offsetHeight;
-                    
-                    // Asegurarnos de que el scroll esté habilitado
-                    document.body.style.overflow = 'auto';
-                    document.documentElement.style.overflow = 'auto';
-                    
+                    if (backdrop) backdrop.remove();
+
                     // Mostrar mensaje de éxito
                     setTimeout(() => {
                         alert('Inicio de sesión exitoso');
