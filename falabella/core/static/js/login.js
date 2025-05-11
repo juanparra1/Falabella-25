@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     setupLoginAndRegistration();
     setupModalTriggers();
+    setupRecoveryLinks();
 });
 
 function setupModalTriggers() {
@@ -90,5 +91,52 @@ function setupLoginAndRegistration() {
                 alert(error.message);
             });
         });
+    }
+}
+
+function setupRecoveryLinks() {
+    // Manejador para recuperación por correo
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'recoveryByEmail' || e.target.closest('#forgotPasswordLink')) {
+            e.preventDefault();
+            // Cerrar el modal de login
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            if (loginModal) {
+                loginModal.hide();
+            }
+            // Abrir el modal de recuperación por correo
+            const emailRecoveryModal = new bootstrap.Modal(document.getElementById('emailRecoveryModal'));
+            emailRecoveryModal.show();
+        }
+    });
+
+    // Manejador para recuperación por SMS
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'recoveryBySMS') {
+            e.preventDefault();
+            // Cerrar el modal de login
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            if (loginModal) {
+                loginModal.hide();
+            }
+            // Abrir el modal de recuperación por SMS
+            const smsModal = new bootstrap.Modal(document.getElementById('smsModal'));
+            smsModal.show();
+        }
+    });
+}
+
+function togglePassword(inputId) {
+    const passwordInput = document.getElementById(inputId);
+    const toggleIcon = document.getElementById('togglePassword');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('bi-eye-slash');
+        toggleIcon.classList.add('bi-eye');
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('bi-eye');
+        toggleIcon.classList.add('bi-eye-slash');
     }
 }

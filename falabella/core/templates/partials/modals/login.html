@@ -13,24 +13,57 @@
                 <form id="loginForm">
                     {% csrf_token %}
                     <h4 class="text-label mb-4">Inicia sesión para comprar</h4>
-                    <div class="mb-3">
+                    <div class="mb-3" style="margin-top: -15px;">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <input type="email" 
+                               class="form-control border-0 border-bottom rounded-0" 
+                               id="email" 
+                               placeholder="nombre@ejemplo.com" 
+                               style="box-shadow: none; background: transparent;" 
+                               required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" required>
-                        <div class="mt-2">
-                            <small>
-                                <a href="#" class="text-decoration-none" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
-                            </small>
+                        <div class="position-relative">
+                            <input type="password" 
+                                   class="form-control border-0 border-bottom rounded-0" 
+                                   id="password" 
+                                   placeholder="Ingresa tu contraseña" 
+                                   style="box-shadow: none; background: transparent;" 
+                                   required>
+                            <button type="button" 
+                                    class="btn position-absolute end-0 top-50 translate-middle-y" 
+                                    onclick="togglePassword('password')" 
+                                    style="background: none; border: none;">
+                                <i class="bi bi-eye-slash" id="togglePassword"></i>
+                            </button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-dark w-100 rounded-pill">Iniciar sesión</button>
+
+                    <!-- Enlaces de recuperación de contraseña -->
+                    <div class="text-start mb-3">
+                        <a href="#" style="font-size: 14px; text-decoration: none;" id="forgotPasswordLink">
+                            ¿Olvidaste tu contraseña? No te preocupes, pide un código verificador por 
+                            <u id="recoveryByEmail" style="cursor: pointer;">correo</u> o 
+                        </a>
+                        <a href="#" style="font-size: 14px; text-decoration: none;" id="recoveryBySMS">
+                            <u style="cursor: pointer;">SMS</u> para cambiar tu contraseña.
+                        </a>
+                    </div>
+
+                    <button type="submit" 
+                            class="btn rounded-pill w-100" 
+                            style="background-color: #000; color: #fff; font-size: 14px;">
+                        Ingresar
+                    </button>
+                    
                     <div class="text-center mt-3">
-                        <small>¿No tienes cuenta? 
-                            <a href="#" class="text-decoration-none" id="registerLink">Regístrate aquí</a>
-                        </small>
+                        <a href="#" 
+                           class="" 
+                           id="registerLink" 
+                           style="font-size: 14px; text-decoration: none;">
+                            ¿Aún no tienes cuenta? <u>Regístrate</u>
+                        </a>
                     </div>
                 </form>
             </div>
