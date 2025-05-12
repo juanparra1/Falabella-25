@@ -18,7 +18,11 @@ class CartItem(models.Model):
         return f"{self.quantity} x {self.product.name}"
 
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+        related_name='cart_orders'  # Agregamos related_name
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(
