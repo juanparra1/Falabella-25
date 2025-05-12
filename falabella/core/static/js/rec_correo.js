@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (emailRecoveryForm) {
         emailRecoveryForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            // Lógica específica para el formulario de recuperación por correo
             const email = this.querySelector('input[type="email"]').value;
 
             if (email && email.includes('@')) {
@@ -21,32 +20,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': getCSRFToken(), // Agregar el token CSRF
+                        'X-CSRFToken': getCSRFToken(),
                     },
                     body: JSON.stringify({ email }),
                 })
                 .then(response => {
                     if (response.ok) {
                         alert('Se ha enviado un código de verificación a tu correo electrónico');
-                        // Cambiar el contenido del modal para ingresar el código
-                        const modalBody = this.closest('.modal-body');
-                        modalBody.innerHTML = `
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-12">
-                                        <h4 class="text-label mb-3">Verificación</h4>
-                                        <p class="text-muted mb-4">Ingresa el código de verificación enviado a tu correo</p>
-                                        <form id="verificationForm">
-                                            <div class="mb-3">
-                                                <label class="form-label">Código de verificación</label>
-                                                <input type="text" class="form-control" placeholder="Ingresa el código" required>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Verificar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                        
+                        // Ocultar el modal actual
+                        const emailRecoveryModalElement = document.getElementById('emailRecoveryModal');
+                        if (emailRecoveryModalElement) {
+                            const emailRecoveryModal = bootstrap.Modal.getOrCreateInstance(emailRecoveryModalElement);
+                            emailRecoveryModal.hide();
+                        } else {
+                            console.error('El modal emailRecoveryModal no se encuentra en el DOM.');
+                        }
+
+                        // Mostrar el contenedor de cambio de contraseña
+                        const passwordResetContainer = document.getElementById('password-reset-container');
+                        if (passwordResetContainer) {
+                            passwordResetContainer.style.display = 'block';
+                            passwordResetContainer.scrollIntoView({ behavior: 'smooth' });
+                        }
                     } else {
                         alert('Error al enviar el correo. Inténtalo de nuevo.');
                     }

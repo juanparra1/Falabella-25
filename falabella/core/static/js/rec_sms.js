@@ -26,9 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Redirigir al módulo de cambio de contraseña
-                        const modal = new bootstrap.Modal(document.getElementById('cambioContraModal'));
-                        modal.show();
+                        alert('Se ha enviado un código de verificación a tu número de teléfono');
+                        
+                        // Ocultar el modal actual
+                        const smsModal = bootstrap.Modal.getInstance(document.getElementById('smsModal'));
+                        if (smsModal) smsModal.hide();
+
+                        // Mostrar el modal de cambio de contraseña
+                        const cambioContraModal = new bootstrap.Modal(document.getElementById('cambioContraModal'));
+                        cambioContraModal.show();
                     } else {
                         alert('Error al enviar el SMS. Inténtalo de nuevo.');
                     }

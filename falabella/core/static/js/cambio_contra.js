@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
         return cookieValue || '';
     }
 
+    const passwordResetContainer = document.getElementById('password-reset-container');
+
+    // Mostrar el contenedor de cambio de contraseña
+    function showPasswordReset() {
+        passwordResetContainer.style.display = 'block';
+        passwordResetContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Exportar la función para mostrar el contenedor
+    window.showPasswordReset = showPasswordReset;
+
     // Validación en tiempo real de la contraseña
     const newPasswordInput = document.getElementById('newPassword');
     if (newPasswordInput) {

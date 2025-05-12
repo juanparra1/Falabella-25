@@ -1,7 +1,7 @@
 let cartCounter = 0;
 let totalPrice = 0;
 
-  // Renderizar productos dinámicamente
+// Renderizar productos dinámicamente
 function renderProducts() {
     const productList = document.getElementById("product-list");
     productList.innerHTML = ""; // Limpiar contenido previo
@@ -24,6 +24,7 @@ function renderProducts() {
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
+                    <span class="me-3">${formatCurrency(product.price)}</span> <!-- Mostrar precio aquí -->
                     <button class="btn btn-outline-secondary btn-sm me-2" onclick="updateQuantity(-1, ${product.id})">-</button>
                     <span id="quantity-${product.id}">${product.quantity}</span>
                     <button class="btn btn-outline-secondary btn-sm ms-2" onclick="updateQuantity(1, ${product.id})">+</button>
@@ -36,33 +37,36 @@ function renderProducts() {
     updateSummary();
 }
 
-  // Actualizar cantidad de productos
+// Actualizar cantidad de productos
 function updateQuantity(change, productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     if (!Array.isArray(cart)) {
         console.error("El carrito no es un array válido.");
         return;
     }
-    const product = cart.find((p) => p.id === productId);
-    if (!product) return;
+    const productIndex = cart.findIndex((p) => p.id === productId);
+    if (productIndex === -1) return;
 
-    // Evitar cantidades negativas
-    if (product.quantity + change < 1) return;
-
+    const product = cart[productIndex];
     product.quantity += change;
+
+    // Si la cantidad es menor a 1, eliminar el producto del carrito
+    if (product.quantity < 1) {
+        cart.splice(productIndex, 1);
+    }
 
     // Guardar carrito actualizado en localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
 
-    // Actualizar cantidad en el DOM
-    document.getElementById(`quantity-${productId}`).textContent = product.quantity;
+    // Actualizar la vista del carrito
+    renderProducts();
 
     // Actualizar totales
     updateSummary();
     updateCartCounter();
 }
 
-  // Actualizar resumen del carrito
+// Actualizar resumen del carrito
 function updateSummary() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     if (!Array.isArray(cart)) {
