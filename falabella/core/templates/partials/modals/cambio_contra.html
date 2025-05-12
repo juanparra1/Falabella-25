@@ -1,60 +1,42 @@
 <div class="container mt-4" style="display: none;" id="password-reset-container">
-    <h2>Restablecer contraseña</h2>
-    <p class="text-muted">Ingresa una nueva contraseña para tu cuenta y evita que se repita con las que utilizaste anteriormente.</p>
-    
-    <div class="d-flex flex-wrap">
-        <!-- Formulario de cambio de contraseña -->
-        <div class="flex-grow-1 me-4">
-            <div class="card p-3">
-                <form id="passwordResetForm">
-                    <div class="mb-3">
-                        <label class="form-label">Correo electrónico</label>
-                        <p class="text-muted" id="userEmail">usuario@ejemplo.com</p>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Código verificador</label>
-                        <input type="text" class="form-control" placeholder="Ingresa el código" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Nueva contraseña</label>
-                        <input type="password" class="form-control" id="newPassword" placeholder="Ingresa una contraseña" required>
-                        <div class="password-requirements mt-2">
-                            <small class="text-muted d-block">Requisitos:</small>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="lengthCheck" disabled>
-                                <label class="form-check-label" for="lengthCheck">Mín. 8 caracteres</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="uppercaseCheck" disabled>
-                                <label class="form-check-label" for="uppercaseCheck">1 mayúscula</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="lowercaseCheck" disabled>
-                                <label class="form-check-label" for="lowercaseCheck">1 minúscula</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="numberCheck" disabled>
-                                <label class="form-check-label" for="numberCheck">1 número</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="spaceCheck" disabled>
-                                <label class="form-check-label" for="spaceCheck">Sin espacios</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-dark w-100 mt-3">Crear</button>
-                </form>
-            </div>
-        </div>
+    <div class="card p-4 shadow-sm">
+        <h2 class="text-center mb-3">Restablecer contraseña</h2>
+        <p class="text-muted text-center mb-4">
+            Ingresa una nueva contraseña para tu cuenta y evita que se repita con las que utilizaste anteriormente.
+        </p>
 
-        <!-- Información adicional -->
-        <div class="card p-3" style="width: 300px;">
-            <h5>¿Necesitas ayuda?</h5>
-            <p class="text-muted">Si tienes problemas para restablecer tu contraseña, contáctanos para obtener soporte adicional.</p>
-            <button class="btn btn-outline-dark w-100">Contactar soporte</button>
-        </div>
+        <form id="passwordResetForm">
+            <div class="mb-3">
+                <label class="form-label">Correo electrónico</label>
+                <p class="form-control-plaintext text-muted" id="userEmail">j.diaz3@utp.edu.co</p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Código verificador</label>
+                <input type="text" class="form-control" placeholder="Ingresa un código verificador" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nueva contraseña</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="newPassword" placeholder="Ingresa una contraseña" required>
+                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                        <i class="bi bi-eye-slash"></i>
+                    </button>
+                </div>
+                <div class="password-requirements mt-2">
+                    <small class="text-muted d-block">Requisitos:</small>
+                    <ul class="list-unstyled mb-0">
+                        <li id="lengthCheck" class="text-muted">✔ Mín. 8 caracteres</li>
+                        <li id="uppercaseCheck" class="text-muted">✔ 1 mayúscula</li>
+                        <li id="lowercaseCheck" class="text-muted">✔ 1 minúscula</li>
+                        <li id="numberCheck" class="text-muted">✔ 1 número</li>
+                        <li id="spaceCheck" class="text-muted">✔ Sin espacios</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark w-100 mt-3">Crear</button>
+        </form>
     </div>
 </div>

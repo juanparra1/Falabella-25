@@ -1,0 +1,17 @@
+#password-reset-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.password-requirements ul {
+    padding-left: 20px;
+}
+
+.password-requirements li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.password-requirements li.text-success {
+    color: green !important;
+}
