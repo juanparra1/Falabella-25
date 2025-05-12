@@ -4,51 +4,68 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">
-                <img src="{% static 'img/falIconButton.png' %}" alt="Falabella Icon" height="30">
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="loginModalLabel">
+                    <img src="{% static 'img/falIconButton.png' %}" alt="Falabella Icon" height="30">
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form>
-                <h4 class="text-label mb-4">Inicia sesión para comprar</h4>
-                <div class="mb-3" style="margin-top: -15px;">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control border-0 border-bottom rounded-0" id="email" placeholder="nombre@ejemplo.com" style="box-shadow: none; background: transparent;" required>
-                    <label for="password" class="form-label">Contraseña</label>
-                    <div class="position-relative">
-                        <input type="password" class="form-control border-0 border-bottom rounded-0" id="password" 
-                            placeholder="Ingresa tu contraseña" style="box-shadow: none; background: transparent;" required>
-                        <button type="button" class="btn position-absolute end-0 top-50 translate-middle-y" 
-                                onclick="togglePassword('password')" style="background: none; border: none;">
-                        <i class="bi bi-eye-slash" id="togglePassword"></i>
-                        </button>
+                <form id="loginForm">
+                    {% csrf_token %}
+                    <h4 class="text-label mb-4">Inicia sesión para comprar</h4>
+                    <div class="mb-3" style="margin-top: -15px;">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" 
+                               class="form-control border-0 border-bottom rounded-0" 
+                               id="email" 
+                               placeholder="nombre@ejemplo.com" 
+                               style="box-shadow: none; background: transparent;" 
+                               required>
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <div class="position-relative">
+                            <input type="password" 
+                                   class="form-control border-0 border-bottom rounded-0" 
+                                   id="password" 
+                                   placeholder="Ingresa tu contraseña" 
+                                   style="box-shadow: none; background: transparent;" 
+                                   required>
+                            <button type="button" 
+                                    class="btn position-absolute end-0 top-50 translate-middle-y" 
+                                    onclick="togglePassword('password')" 
+                                    style="background: none; border: none;">
+                                <i class="bi bi-eye-slash" id="togglePassword"></i>
+                            </button>
+                        </div>
+                    </div>
 
-                <!-- ... después del campo de contraseña y antes del botón Ingresar ... -->
-                <div class="text-start mb-3">
-                    <a href="#" style="font-size: 14px; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#emailRecoveryModal">
-                        ¿Olvidaste tu contraseña? No te preocupes, pide un código verificador por 
-                        <u id="recoveryByEmail" style="cursor: pointer;">correo</u> o 
-                    </a>
-                    <a href="#" style="font-size: 14px; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#smsModal">
-                        <u id="recoveryBySMS" style="cursor: pointer;">SMS</u> para cambiar tu contraseña.
-                    </a>
-                </div>
+                    <!-- Enlaces de recuperación de contraseña -->
+                    <div class="text-start mb-3">
+                        <a href="#" style="font-size: 14px; text-decoration: none;" id="forgotPasswordLink">
+                            ¿Olvidaste tu contraseña? No te preocupes, pide un código verificador por 
+                            <u id="recoveryByEmail" style="cursor: pointer;">correo</u> o 
+                        </a>
+                        <a href="#" style="font-size: 14px; text-decoration: none;" id="recoveryBySMS">
+                            <u style="cursor: pointer;">SMS</u> para cambiar tu contraseña.
+                        </a>
+                    </div>
 
-                <button type="submit" class="btn rounded-pill w-100" 
-                        style="background-color: #000; color: #fff; font-size: 14px;">
-                Ingresar
-                </button>
-                
-                <div class="text-center mt-3">
-                    <a href="#" class=" " id="registerLinkFromLogin" 
-                        style="font-size: 14px; text-decoration: none;">
-                        ¿Aún no tienes cuenta? <u>Regístrate</u>
-                    </a>
-                </div>
-            </form>
+                    <button type="submit" 
+                            class="btn rounded-pill w-100" 
+                            style="background-color: #000; color: #fff; font-size: 14px;">
+                        Ingresar
+                    </button>
+                    
+                    <div class="text-center mt-3">
+                        <a href="#" 
+                           class="" 
+                           id="registerLink" 
+                           style="font-size: 14px; text-decoration: none;">
+                            ¿Aún no tienes cuenta? <u>Regístrate</u>
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

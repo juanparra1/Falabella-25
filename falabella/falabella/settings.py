@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from .payment_config import *  
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'django_filters',
     'cart',
     'products',
-
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -160,4 +161,11 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
     }
+}
+
+# Configuración de Mercado Pago
+MERCADOPAGO_CONFIG = {
+    'PUBLIC_KEY': MERCADOPAGO_PUBLIC_KEY,
+    'ACCESS_TOKEN': MERCADOPAGO_ACCESS_TOKEN,
+    'SANDBOX': True,  # True para desarrollo, False para producción
 }

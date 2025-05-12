@@ -56,24 +56,11 @@ class AddressSerializer(serializers.ModelSerializer):
 
 class CustomObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
-        email = attrs.get('email')
-        password = attrs.get('password')
-
-        if not email or not password:
-            raise AuthenticationFailed('Email and password are required.')
-        
-        user = authenticate(email=email, password=password)
-        if not user:
-            raise AuthenticationFailed('Invalid email or password.')
-        
-        #Autenticacion de usuario 
-        user = authenticate(email=email, password=password)
-        if not user:
-            raise AuthenticationFailed('Invalid email or password.')
-        
         data = super().validate(attrs)
-        data['email'] = user.email
+        # Obtener el usuario después de la validación
+        user = self.user
+        # Agregar información adicional al token
         data['first_name'] = user.first_name
         data['last_name'] = user.last_name
+        data['email'] = user.email
         return data
-    
