@@ -1,4 +1,6 @@
 #password-reset-container {
+    z-index: 1050; /* Asegúrate de que sea mayor que el modal */
+    position: relative; /* Si es necesario */
     max-width: 500px;
     margin: 0 auto;
 }

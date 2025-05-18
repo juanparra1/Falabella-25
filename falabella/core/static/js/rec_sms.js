@@ -32,9 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         const smsModal = bootstrap.Modal.getInstance(document.getElementById('smsModal'));
                         if (smsModal) smsModal.hide();
 
-                        // Mostrar el modal de cambio de contraseña
-                        const cambioContraModal = new bootstrap.Modal(document.getElementById('cambioContraModal'));
-                        cambioContraModal.show();
+                        // Eliminar el overlay del modal
+                        document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+
+                        // Mostrar el contenedor de cambio de contraseña
+                        const passwordResetContainer = document.getElementById('password-reset-container');
+                        if (passwordResetContainer) {
+                            passwordResetContainer.style.display = 'block';
+                            passwordResetContainer.scrollIntoView({ behavior: 'smooth' });
+                        }
                     } else {
                         alert('Error al enviar el SMS. Inténtalo de nuevo.');
                     }

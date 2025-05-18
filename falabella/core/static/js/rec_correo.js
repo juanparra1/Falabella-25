@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (emailRecoveryModalElement) {
                             const emailRecoveryModal = bootstrap.Modal.getOrCreateInstance(emailRecoveryModalElement);
                             emailRecoveryModal.hide();
-                        } else {
-                            console.error('El modal emailRecoveryModal no se encuentra en el DOM.');
                         }
+
+                        // Eliminar el overlay del modal
+                        document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
 
                         // Mostrar el contenedor de cambio de contraseña
                         const passwordResetContainer = document.getElementById('password-reset-container');
