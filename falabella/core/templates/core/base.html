@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="{% static 'css/register.css' %}">
         <link rel="stylesheet" href="{% static 'css/sold_carousel.css' %}">
         <link rel="stylesheet" href="{% static 'css/cambio_contra.css' %}">
+        <link rel="stylesheet" href="{% static 'css/entrega.css' %}">
 
         
         {% block extra_css %}{% endblock %}
@@ -72,6 +73,9 @@
             {% include 'partials/modals/rec_sms.html' %}
             {% include 'partials/modals/car.html' %}
             {% include 'partials/modals/cambio_contra.html' %}
+            {% include 'partials/modals/entrega.html' %}
+            {% include 'partials/modals/pago.html' %}
+            {% include 'partials/modals/selec_direccion.html' %}
 
             <!-- Footer -->
             {% include 'partials/footer.html' %}
@@ -95,6 +99,10 @@
         <script src="{% static 'js/register.js' %}"></script>
         <script src="{% static 'js/cart.js' %}"></script>
         <script src="{% static 'js/cambio_contra.js' %}"></script>
+        <script src="{% static 'js/entrega.js' %}"></script>
+        <script src="{% static 'js/pago.js' %}"></script>
+        <script src="{% static 'js/selec_direccion.js' %}"></script>
+
         
         {% block extra_js %}{% endblock %}
     </body>
