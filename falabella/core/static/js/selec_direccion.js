@@ -7,17 +7,14 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.show();
     });
 
-    // Agregar nueva dirección
+    // Agregar nueva dirección: cerrar este modal y abrir el de agregar
     document.getElementById('agregar-direccion').addEventListener('click', function() {
-        const input = document.getElementById('nueva-direccion');
-        const valor = input.value.trim();
-        if (valor) {
-            let direcciones = JSON.parse(localStorage.getItem('direcciones')) || [];
-            direcciones.push(valor);
-            localStorage.setItem('direcciones', JSON.stringify(direcciones));
-            input.value = '';
-            renderDirecciones();
-        }
+        const modalSeleccion = bootstrap.Modal.getInstance(document.getElementById('selecDireccionModal'));
+        if (modalSeleccion) modalSeleccion.hide();
+        setTimeout(() => {
+            const modalAgregar = new bootstrap.Modal(document.getElementById('agregarDireccionModal'));
+            modalAgregar.show();
+        }, 400);
     });
 
     // Seleccionar dirección
