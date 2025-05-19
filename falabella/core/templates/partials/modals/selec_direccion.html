@@ -1,20 +1,25 @@
 <!-- Modal Seleccionar Dirección -->
 <div class="modal fade" id="selecDireccionModal" tabindex="-1" aria-labelledby="selecDireccionLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="selecDireccionLabel">Selecciona una dirección</h5>
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title d-flex align-items-center gap-2" id="selecDireccionLabel">
+          <i class="bi bi-geo-alt fs-5"></i>
+          Selecciona una dirección
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
-      <div class="modal-body">
-        <ul class="list-group mb-3" id="direccion-lista">
+      <div class="modal-body pb-0">
+        <ul class="list-group mb-4" id="direccion-lista">
           <!-- Aquí se llenan las direcciones dinámicamente -->
         </ul>
-        <input type="text" class="form-control mb-2" id="nueva-direccion" placeholder="Agregar nueva dirección">
-        <button class="btn btn-outline-dark w-100 mb-2" id="agregar-direccion">Agregar nueva dirección</button>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-dark" id="seleccionar-direccion">Seleccionar</button>
+      <div class="modal-footer border-0 pt-0 d-flex justify-content-between align-items-center" style="gap: 16px;">
+        <button class="btn btn-link px-2" id="agregar-direccion" style="white-space:nowrap;"
+          data-bs-toggle="modal" data-bs-target="#agregarDireccionModal">
+          Agregar nueva dirección
+        </button>
+        <button class="btn btn-outline-dark px-5 ms-auto" id="seleccionar-direccion" style="font-weight:500;">Seleccionar</button>
       </div>
     </div>
   </div>

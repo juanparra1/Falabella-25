@@ -1,0 +1,42 @@
+<!-- Modal Agregar Dirección -->
+<div class="modal fade" id="agregarDireccionModal" tabindex="-1" aria-labelledby="agregarDireccionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title d-flex align-items-center gap-2" id="agregarDireccionLabel">
+                <i class="bi bi-geo-alt fs-5"></i>
+                Ingresa tu dirección
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <form id="form-direccion">
+                <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Departamento</label>
+                    <input type="text" class="form-control" id="departamento" placeholder="Selecciona un Departamento">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="ciudad" placeholder="Selecciona una Ciudad">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Barrio</label>
+                    <input type="text" class="form-control" id="barrio" placeholder="Selecciona un Barrio">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="Ingresa el dirección">
+                </div>
+                    <div class="mb-3">
+                        <label class="form-label">Torre/ Apartamento/ Conjunto/ Oficina/ Condominio</label>
+                        <input type="text" class="form-control" id="detalle" placeholder="Ejem. Casa 3, Dpto 101.">
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0 d-flex justify-content-between align-items-center" style="gap: 16px;">
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Descartar cambios</button>
+                    <button type="submit" class="btn btn-outline-dark px-5 ms-auto" id="confirmar-direccion" style="font-weight:500;">Confirmar dirección</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
