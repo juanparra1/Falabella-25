@@ -8,30 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         initializeTooltipsAndPopovers();
     }
-
-    // Manejar eventos de clic en los enlaces
-    document.addEventListener('click', function(e) {
-        // Manejar clic en enlace de inicio de sesión
-        if (e.target.id === 'loginLink') {
-            e.preventDefault();
-            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-            loginModal.show();
-        }
-        
-        // Manejar cierre de sesión
-        if (e.target.id === 'logoutLink') {
-            e.preventDefault();
-            handleLogout();
-        }
-
-        // Manejar clic en enlace de "Mi cuenta"
-        if (e.target.closest('a[href="/mi-cuenta"]')) {
-            e.preventDefault();
-            import('./MiCuenta.js').then(module => {
-                module.abrirMiCuentaModal();
-            });
-        }
-    });
 });
 
 function initializeTooltipsAndPopovers() {
@@ -94,6 +70,23 @@ function initializeTooltipsAndPopovers() {
         const popoverElement = document.querySelector('.popover');
         if (!loginArea.contains(event.target) && popoverElement && !popoverElement.contains(event.target)) {
             if (popover) popover.hide();
+        }
+    });
+
+    // Evento para login y registro
+    document.body.addEventListener('click', function(e) {
+        if (e.target.id === 'loginLink') {
+            e.preventDefault();
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }
+        if (e.target.id === 'registerLink') {
+            e.preventDefault();
+            const registerForm = document.getElementById('inlineRegisterForm');
+            if (registerForm) {
+                registerForm.style.display = 'block';
+                registerForm.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     });
 
@@ -189,9 +182,33 @@ function updateNavbarLoginState(userName = null) {
         `
     });
 
-    // Configurar eventos del popover
+    // Mostrar/ocultar popover
     loginArea.addEventListener('mouseover', () => {
-        if (popover) popover.show();
+        // Verifica que chevronIcon sigue en el DOM
+        if (document.body.contains(chevronIcon) && popover) {
+            popover.show();
+
+            setTimeout(() => {
+                const miCuentaLink = document.querySelector('.popover #miCuentaLink');
+                if (miCuentaLink) {
+                    miCuentaLink.onclick = function(e) {
+                        e.preventDefault();
+                        if (window.abrirMiCuentaModulo) {
+                            window.abrirMiCuentaModulo();
+                        }
+                        popover.hide();
+                    };
+                }
+                const logoutLink = document.querySelector('.popover #logoutLink');
+                if (logoutLink) {
+                    logoutLink.onclick = function(e) {
+                        e.preventDefault();
+                        handleLogout();
+                        popover.hide();
+                    };
+                }
+            }, 50);
+        }
     });
     
     loginArea.addEventListener('mouseleave', () => setTimeout(() => {
