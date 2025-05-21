@@ -1,0 +1,244 @@
+/* Estilo para el saludo superior */
+#perfil-modal h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #222;
+}
+
+/* Tabs superiores estilo Falabella */
+#perfil-modal .perfil-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+    background: #fff;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+#perfil-modal .perfil-tab-btn {
+    flex: 1 1 0;
+    border: none;
+    background: none;
+    padding: 1.2rem 0 0.5rem 0;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #222;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    transition: color 0.2s, border-bottom 0.2s;
+    outline: none;
+    box-shadow: none;
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#perfil-modal .perfil-tab-btn:not(:last-child) {
+    border-right: 1px solid #eee;
+}
+
+#perfil-modal .perfil-tab-btn.active {
+    color: #222;
+    border-bottom: 3px solid #c4e100; /* Verde Falabella */
+    background: #fff;
+}
+
+#perfil-modal .perfil-tab-btn i {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+    display: block;
+}
+
+.perfil-tabs-wrapper {
+    width: 25%;
+    min-width: 240px;
+    max-width: 320px;
+    margin-left: 0;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 991px) {
+    .perfil-tabs-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Menú lateral de perfil */
+#perfil-modal #perfil-menu {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(60,60,60,0.04);
+    padding: 0.5rem 0;
+    border: none;
+}
+
+#perfil-modal #perfil-menu .list-group-item {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 1.1rem 1.5rem;
+    font-size: 1.08rem;
+    color: #222;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 2px;
+}
+
+#perfil-modal #perfil-menu .list-group-item i.bi {
+    font-size: 1.5rem;
+    color: #6c757d;
+    margin-right: 0.7rem;
+}
+
+#perfil-modal #perfil-menu .list-group-item .bi-chevron-right {
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-left: 0.7rem;
+    transition: color 0.2s;
+}
+
+#perfil-modal #perfil-menu .list-group-item.active,
+#perfil-modal #perfil-menu .list-group-item:focus,
+#perfil-modal #perfil-menu .list-group-item:hover {
+    background: #f5f7fa;
+    color: #222;
+    font-weight: 600;
+}
+
+#perfil-modal #perfil-menu .list-group-item:last-child {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+#perfil-modal #perfil-menu .list-group-item:first-child {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+/* Cerrar sesión en rojo */
+#perfil-modal #perfil-menu .list-group-item.text-danger {
+    color: #e53935;
+    font-weight: 500;
+}
+#perfil-modal #perfil-menu .list-group-item.text-danger .bi {
+    color: #e53935;
+}
+#perfil-modal #perfil-menu .list-group-item.text-danger.active,
+#perfil-modal #perfil-menu .list-group-item.text-danger:hover {
+    background: #fdeaea;
+    color: #e53935;
+}
+
+/* Estilo para el formulario de datos personales */
+#perfil-modal #datos-personales {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem 2rem 1.5rem 2rem;
+    box-shadow: 0 2px 8px rgba(60,60,60,0.04);
+    margin-bottom: 1.5rem;
+}
+
+#perfil-modal #datos-personales h4 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+#perfil-modal #datos-personales .form-label {
+    font-weight: 500;
+    color: #222;
+}
+
+#perfil-modal #datos-personales .form-control:disabled {
+    background: #f5f7fa;
+    color: #888;
+}
+
+#perfil-modal #datos-personales .input-group-text {
+    font-weight: 500;
+    color: #222;
+    border: none;
+}
+
+#perfil-modal #guardar-btn {
+    min-width: 160px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    background: #222;
+    border: none;
+    transition: background 0.2s;
+}
+
+#perfil-modal #guardar-btn:disabled {
+    background: #f5f7fa;
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+#perfil-modal #guardar-btn:not(:disabled) {
+    background: #002d5b;
+    color: #fff;
+}
+
+#perfil-modal .invalid-feedback {
+    display: none;
+    color: #e53935;
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+}
+
+#perfil-modal #datos-personales .form-control {
+    border: none;
+    border-bottom: 2px solid #e0e0e0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transition: border-color 0.2s;
+    font-size: 1.08rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#perfil-modal #datos-personales .form-control:focus {
+    border-bottom: 2.5px solid #222;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+}
+
+#perfil-modal #datos-personales .form-control:disabled {
+    background: transparent;
+    color: #888;
+    border-bottom: 2px solid #e0e0e0;
+    opacity: 1;
+}
+
+#perfil-modal #datos-personales .input-group-text {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-weight: 500;
+    padding-left: 0;
+}
+
+#perfil-modal #datos-personales .form-control::placeholder {
+    color: #bbb;
+    opacity: 1;
+}
+
+#perfil-modal #datos-personales form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#perfil-modal #guardar-btn {
+    align-self: center;
+}

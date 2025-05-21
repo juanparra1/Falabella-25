@@ -5,10 +5,21 @@
         <!-- Menú lateral y tabs superiores -->
         <div class="col-12">
             <!-- Tabs superiores -->
-            <div class="d-flex mb-3">
-                <button class="btn btn-light border-bottom border-3 border-success rounded-0 me-2 active" id="tab-perfil">Mi perfil</button>
-                <button class="btn btn-light border-bottom border-3 rounded-0 me-2" id="tab-compras">Mis compras</button>
-                <button class="btn btn-light border-bottom border-3 rounded-0" id="tab-ayuda">Ayuda</button>
+            <div class="perfil-tabs-wrapper mb-3">
+                <div class="perfil-tabs">
+                    <button class="perfil-tab-btn active" id="tab-perfil">
+                        <i class="bi bi-person"></i>
+                        Mi perfil
+                    </button>
+                    <button class="perfil-tab-btn" id="tab-compras">
+                        <i class="bi bi-box"></i>
+                        Mis compras
+                    </button>
+                    <button class="perfil-tab-btn" id="tab-ayuda">
+                        <i class="bi bi-question-circle"></i>
+                        Ayuda
+                    </button>
+                </div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
@@ -54,33 +65,44 @@
                 <!-- Aquí se mostrará el contenido de cada sección -->
                 <div id="datos-personales" class="perfil-section">
                     <h4>Datos personales</h4>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" value="Juan David" disabled>
+                    <form id="form-datos-personales" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" value="Juan David" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Primer apellido</label>
+                                <input type="text" class="form-control" id="apellido1" value="Martinez" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Segundo apellido</label>
+                                <input type="text" class="form-control" id="apellido2" placeholder="Ingresa tu apellido">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Tipo de documento</label>
+                                <input type="text" class="form-control" id="tipo-doc" value="Cédula de Ciudadanía" disabled>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Número de documento</label>
+                                <input type="text" class="form-control" id="cedula" value="1003765084" disabled>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Celular</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" style="background:#f5f7fa;">+57</span>
+                                    <input type="text" class="form-control" id="celular" value="3022779797" maxlength="10" pattern="\d{10}" required>
+                                </div>
+                                <div class="invalid-feedback" id="celular-feedback">Debe tener 10 dígitos.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correo" value="kimaswiko.9@gmail.com" required>
+                                <div class="invalid-feedback" id="correo-feedback">Debe ser un correo válido y terminar en @ejemplo.com</div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Primer apellido</label>
-                            <input type="text" class="form-control" value="Martinez" disabled>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Segundo apellido</label>
-                            <input type="text" class="form-control" placeholder="Ingresa tu apellido" disabled>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" value="kimaswiko.9@gmail.com" disabled>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Tipo de documento</label>
-                            <input type="text" class="form-control" value="Cédula de Ciudadanía 1003765084" disabled>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Celular</label>
-                            <input type="text" class="form-control" value="+57 3022779797" disabled>
-                        </div>
-                    </div>
-                    <button class="btn btn-success" disabled>Guardar</button>
+                        <button type="submit" class="btn btn-dark" id="guardar-btn" disabled>Guardar</button>
+                    </form>
                 </div>
                 <!-- Puedes agregar más divs con id igual al data-section de cada botón para otras secciones -->
                 <div id="direcciones" class="perfil-section" style="display:none;">
