@@ -23,6 +23,14 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             handleLogout();
         }
+
+        // Manejar clic en enlace de "Mi cuenta"
+        if (e.target.closest('a[href="/mi-cuenta"]')) {
+            e.preventDefault();
+            import('./MiCuenta.js').then(module => {
+                module.abrirMiCuentaModal();
+            });
+        }
     });
 });
 
@@ -146,7 +154,7 @@ function updateNavbarLoginState(userName = null) {
             <div class="popover-body text-start">
                 <ul class="list-unstyled m-0">
                     <li class="mb-3">
-                        <a href="/mi-cuenta" class="semi-bold-on-hover no-underline">
+                        <a href="#" class="semi-bold-on-hover no-underline" id="miCuentaLink">
                             <i class="bi bi-person me-2"></i>Mi cuenta
                         </a>
                     </li>
