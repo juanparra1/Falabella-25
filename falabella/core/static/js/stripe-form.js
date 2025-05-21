@@ -5,24 +5,10 @@ async function initializeStripeForm(clientSecret, publicKey) {
     // Inicializar Stripe con la clave pública
     stripe = Stripe(publicKey);
     elements = stripe.elements();
+    const card = elements.create('card');
+    const form = document.getElementById('payment-form');
+    const submitButton = form.querySelector('button[type="submit"]');
     
-    const style = {
-        base: {
-            color: "#32325d",
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: "antialiased",
-            fontSize: "16px",
-            "::placeholder": {
-                color: "#aab7c4"
-            }
-        },
-        invalid: {
-            color: "#fa755a",
-            iconColor: "#fa755a"
-        }
-    };
-    
-    const card = elements.create('card', {style: style});
     card.mount('#card-element');
     
     // Manejar errores de validación en tiempo real
@@ -35,12 +21,8 @@ async function initializeStripeForm(clientSecret, publicKey) {
         }
     });
     
-    const form = document.getElementById('payment-form');
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        
-        // Deshabilitar el botón mientras procesa
-        const submitButton = form.querySelector('button[type="submit"]');
         submitButton.disabled = true;
         submitButton.textContent = 'Procesando...';
         
@@ -58,6 +40,26 @@ async function initializeStripeForm(clientSecret, publicKey) {
                 submitButton.textContent = 'Pagar';
             } else {
                 if (paymentIntent.status === 'succeeded') {
+                    // Guardar información en la sesión
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const totalAmount = cart.reduce((total, item) => total + item.quantity * item.price, 0);
+                    const precioEntrega = getEntregaSeleccionada(); // Asegúrate de que esta función esté disponible
+                    const totalWithShipping = totalAmount + precioEntrega;
+                    
+                    // Guardar datos en la sesión de Django
+                    await fetch('/save-payment-data/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        },
+                        body: JSON.stringify({
+                            total_amount: totalWithShipping,
+                            shipping_address: document.getElementById('direccion-actual').textContent,
+                            shipping_method: document.querySelector('input[name="entrega"]:checked').nextElementSibling.textContent
+                        })
+                    });
+
                     // Limpiar carrito
                     localStorage.removeItem('cart');
                     
@@ -69,7 +71,13 @@ async function initializeStripeForm(clientSecret, publicKey) {
                     
                     // Redirigir después de 2 segundos
                     setTimeout(() => {
-                        window.location.href = '/payment-success/';
+                        // Usar la URL definida en base.html
+                        if (typeof PAYMENT_SUCCESS_URL !== 'undefined') {
+                            window.location.href = PAYMENT_SUCCESS_URL;
+                        } else {
+                            // Fallback por si la variable no está definida
+                            window.location.href = '/payment-success/';
+                        }
                     }, 2000);
                 }
             }

@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Pago Exitoso{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <!-- Ícono de éxito -->
+                    <div class="text-center mb-4">
+                        <i class="bi bi-check-circle-fill" style="font-size: 4rem; color: #28a745;"></i>
+                    </div>
+
+                    <!-- Título y mensaje -->
+                    <h2 class="text-center mb-4">¡Pago realizado con éxito!</h2>
+                    <p class="text-center text-muted mb-5">
+                        Gracias por tu compra. Te hemos enviado un correo electrónico con los detalles de tu pedido.
+                    </p>
+
+                    <!-- Detalles del pedido -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Detalles de tu compra</h5>
+                            <div class="row mb-3">
+                                <div class="col-6">Número de pedido:</div>
+                                <div class="col-6 text-end"><strong>{{ order_number }}</strong></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6">Fecha:</div>
+                                <div class="col-6 text-end">{{ order_date }}</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6">Total pagado:</div>
+                                <div class="col-6 text-end"><strong>${{ total_amount }}</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información de envío -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Información de envío</h5>
+                            <p class="mb-2"><strong>Dirección de entrega:</strong></p>
+                            <p class="mb-4">{{ shipping_address }}</p>
+                            <p class="mb-2"><strong>Método de entrega:</strong></p>
+                            <p>{{ shipping_method }}</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button onclick="window.print()" class="btn btn-outline-dark me-2">
+                            <i class="bi bi-printer me-2"></i>Imprimir comprobante
+                        </button>
+                        <a href="/" class="btn btn-dark">
+                            <i class="bi bi-house me-2"></i>Volver al inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
