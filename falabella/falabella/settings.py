@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from .payment_config import *  
+# Importar las claves desde payment_config.py
+from .payment_config import STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -163,9 +164,9 @@ CACHES = {
     }
 }
 
-# Configuración de Mercado Pago
-MERCADOPAGO_CONFIG = {
-    'PUBLIC_KEY': MERCADOPAGO_PUBLIC_KEY,
-    'ACCESS_TOKEN': MERCADOPAGO_ACCESS_TOKEN,
-    'SANDBOX': True,  # True para desarrollo, False para producción
-}
+# Configuración de Stripe
+STRIPE_PUBLISHABLE_KEY = STRIPE_PUBLISHABLE_KEY
+STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
+
+print("STRIPE_PUBLISHABLE_KEY:", STRIPE_PUBLISHABLE_KEY)
+print("STRIPE_SECRET_KEY:", STRIPE_SECRET_KEY[:10] + "...")  # Solo imprime los primeros 10 caracteres por seguridad

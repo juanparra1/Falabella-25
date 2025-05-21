@@ -23,3 +23,6 @@ class CustomLoginView(LoginView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomObtainPairSerializer
+
+def payment_success(request):
+    return render(request, 'core/payment_success.html')

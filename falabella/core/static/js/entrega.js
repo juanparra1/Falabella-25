@@ -21,15 +21,45 @@ document.addEventListener("DOMContentLoaded", function() {
     if (goToPagoBtn) {
         goToPagoBtn.addEventListener("click", function(e) {
             e.preventDefault();
-            // Oculta el modal de entrega
-            const entregaModal = document.getElementById("entrega-modal");
-            if (entregaModal) entregaModal.style.display = "none";
-            // Muestra el modal de pago
-            const pagoModal = document.getElementById("pago-modal");
-            if (pagoModal) {
-                pagoModal.style.display = "block";
-                actualizarResumenPago();
-            }
+            
+            // Obtener total del carrito
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalProducts = cart.reduce((total, item) => total + item.quantity * item.price, 0);
+            const precioEntrega = getEntregaSeleccionada();
+            const totalAmount = totalProducts + precioEntrega;
+            
+            // Crear PaymentIntent
+            fetch('/payments/create-payment-intent/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    total_amount: totalAmount
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.error || 'Error en el servidor');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.clientSecret) {
+                    // Ocultar modal de entrega
+                    document.getElementById("entrega-modal").style.display = "none";
+                    // Mostrar modal de pago
+                    document.getElementById("pago-modal").style.display = "block";
+                    // Inicializar formulario de Stripe
+                    initializeStripeForm(data.clientSecret, data.publicKey);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al procesar el pago: ' + error.message);
+            });
         });
     }
 
