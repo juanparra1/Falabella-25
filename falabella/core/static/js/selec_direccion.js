@@ -28,31 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Renderiza la lista de direcciones
-function renderDirecciones() {
-    const lista = document.getElementById('direccion-lista');
-    lista.innerHTML = '';
-    let direcciones = JSON.parse(localStorage.getItem('direcciones')) || [];
-    direcciones.forEach((dir, idx) => {
-        const li = document.createElement('li');
-        li.className = 'list-group-item d-flex justify-content-between align-items-center';
-        li.innerHTML = `
-            <div>
-                <input type="radio" name="direccion-radio" value="${dir}" id="dir${idx}" ${idx === 0 ? 'checked' : ''}>
-                <label for="dir${idx}" class="ms-2">${dir}</label>
-            </div>
-            <button class="btn btn-link text-danger p-0 eliminar-direccion" data-idx="${idx}">Eliminar</button>
-        `;
-        lista.appendChild(li);
+document.addEventListener('DOMContentLoaded', function() {
+    // Cuando quieras abrir el modal de selección:
+    Direcciones.abrirModalSeleccionarDireccion(function(direccionSeleccionada) {
+        // Haz lo que necesites con la dirección seleccionada
+        document.getElementById('direccion-actual').textContent = direccionSeleccionada;
     });
-
-    // Eliminar dirección
-    lista.querySelectorAll('.eliminar-direccion').forEach(btn => {
-        btn.addEventListener('click', function() {
-            let direcciones = JSON.parse(localStorage.getItem('direcciones')) || [];
-            direcciones.splice(this.dataset.idx, 1);
-            localStorage.setItem('direcciones', JSON.stringify(direcciones));
-            renderDirecciones();
-        });
-    });
-}
+});

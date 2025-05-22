@@ -46,21 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Puedes personalizar el formato de la dirección aquí
             const direccionCompleta = `${direccion}${detalle ? ', ' + detalle : ''}${barrio ? ', ' + barrio : ''}${ciudad ? ', ' + ciudad : ''}${departamento ? ', ' + departamento : ''}`;
 
-            // Guarda en localStorage
-            let direcciones = JSON.parse(localStorage.getItem('direcciones')) || [];
-            direcciones.push(direccionCompleta);
-            localStorage.setItem('direcciones', JSON.stringify(direcciones));
+            Direcciones.addDireccion(direccionCompleta, () => {
+                // Opcional: renderiza la lista si estás en perfil
+                if (window.location.pathname.includes('perfil')) {
+                    Direcciones.renderDireccionesLista('lista-direcciones');
+                }
+            });
 
-            // Cierra este modal y abre el de selección
-            const modalAgregar = bootstrap.Modal.getInstance(document.getElementById('agregarDireccionModal'));
-            modalAgregar.hide();
-
-            // Espera a que se cierre y luego muestra el de selección
-            setTimeout(() => {
-                if (window.renderDirecciones) renderDirecciones();
-                const modalSeleccion = new bootstrap.Modal(document.getElementById('selecDireccionModal'));
-                modalSeleccion.show();
-            }, 400);
+            // Cierra el modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('agregarDireccionModal'));
+            modal.hide();
+            form.reset();
         });
     }
 });

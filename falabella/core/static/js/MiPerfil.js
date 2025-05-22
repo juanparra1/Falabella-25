@@ -50,3 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Renderizar lista de direcciones al cargar la sección
+    Direcciones.renderDireccionesLista('lista-direcciones');
+
+    // Botón agregar dirección
+    const btnAgregar = document.getElementById('btn-agregar-direccion');
+    if (btnAgregar) {
+        btnAgregar.onclick = function() {
+            Direcciones.abrirModalAgregarDireccion(() => {
+                Direcciones.renderDireccionesLista('lista-direcciones');
+            });
+        };
+    }
+});

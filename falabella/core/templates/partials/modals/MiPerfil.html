@@ -104,10 +104,16 @@
                         <button type="submit" class="btn btn-dark" id="guardar-btn" disabled>Guardar</button>
                     </form>
                 </div>
-                <!-- Puedes agregar más divs con id igual al data-section de cada botón para otras secciones -->
                 <div id="direcciones" class="perfil-section" style="display:none;">
                     <h4>Direcciones</h4>
-                    <p>Aquí irán los formularios de direcciones.</p>
+                    <div id="lista-direcciones" class="mb-4">
+                        <!-- Aquí se renderizan las direcciones -->
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-dark px-5 py-2" id="btn-agregar-direccion" style="border-radius: 2rem; font-weight:600;">
+                            Agregar dirección
+                        </button>
+                    </div>
                 </div>
                 <div id="medios-pago" class="perfil-section" style="display:none;">
                     <h4>Medios de pago</h4>
