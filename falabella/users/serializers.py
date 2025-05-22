@@ -57,10 +57,13 @@ class AddressSerializer(serializers.ModelSerializer):
 class CustomObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        # Obtener el usuario después de la validación
-        user = self.user
-        # Agregar información adicional al token
-        data['first_name'] = user.first_name
-        data['last_name'] = user.last_name
-        data['email'] = user.email
+        refresh = self.get_token(self.user)
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+        
+        # Agregar datos adicionales
+        data['first_name'] = self.user.first_name
+        data['email'] = self.user.email
+        data['id'] = self.user.id
+        
         return data

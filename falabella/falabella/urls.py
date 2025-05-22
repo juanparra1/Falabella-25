@@ -15,55 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include,re_path
-import os
-from core.views import index, help
-from django.urls import include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from django.urls import path, include
+from rest_framework_simplejwt.views import TokenRefreshView
+from users.views import CustomTokenObtainPairView
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import RedirectView
-from core.views import index, help
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from falabella.settings import BASE_DIR  # Importa BASE_DIR desde settings.py
+import os
 
-schema_view = get_schema_view(
-    openapi.Info(
-        title="Falabella API",
-        default_version='v1',
-        description="API for Falabella",
-        terms_of_service="https://www.falabella.com",
-        contact=openapi.Contact(email="soporte@falabella.com"),
-        license=openapi.License(name="Licencia MIT"),
-    ),
-    public=True,
-    permission_classes=(permissions.AllowAny,),
-)
 urlpatterns = [
-    path('', index, name='falabella-co'),
-    path('help/', help, name="help"),
-    path('admin/', admin.site.urls),
-    path('api/', include('users.urls')),
     path('', include('core.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),#Ruta para obtener token
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),#Ruta para refrescar token
-    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico', permanent=True)),
-    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'), #Rutas de documentacion API
-    path('api/', include('products.urls')),#Ruta de productos
-    path("cart/", include("cart.urls")),  # Agrega esta línea
-    path("products/", include("products.urls")),
-    path('payments/', include('payments.urls')),
+    path('admin/', admin.site.urls),
+    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/auth/', include('users.urls')),
+    path('api/', include('products.urls')),
+    path('api/payments/', include('payments.urls')),  # Cambiamos a api/payments/
+    path('api/cart/', include('cart.urls')),
 ]
 
+# Configuración para archivos estáticos y media
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
