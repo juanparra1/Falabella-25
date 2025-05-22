@@ -1,0 +1,46 @@
+<div class="container mt-4" style="display: none;" id="pago-modal">
+    <div class="row">
+        <!-- Columna del formulario de pago -->
+        <div class="col-md-8">
+            <div class="card p-4 shadow-sm">
+                <h4 class="mb-4">Información de pago</h4>
+                <form id="payment-form">
+                    <div class="mb-4">
+                        <label class="form-label">Tarjeta de crédito o débito</label>
+                        <div id="card-element" class="form-control">
+                            <!-- Stripe Elements se montará aquí -->
+                        </div>
+                        <div id="card-errors" role="alert" class="text-danger mt-2"></div>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">
+                        Pagar ahora
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Columna del resumen -->
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Resumen de la compra</h5>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Productos (<span id="pago-total-items">0</span>)</span>
+                    <span id="pago-total-products">$0</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Descuentos</span>
+                    <span id="pago-descuentos">-$0</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Despacho</span>
+                    <span id="pago-entregas">$0</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                    <span>Total</span>
+                    <span id="pago-total">$0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

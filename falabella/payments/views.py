@@ -1,85 +1,39 @@
-import mercadopago
+import json
+import stripe
 from django.conf import settings
-from django.shortcuts import render, redirect
-from django.views.generic import View
 from django.http import JsonResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
-from cart.models import Cart
-from .models import Order
-import uuid
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+from decimal import Decimal
 
-class CheckoutView(LoginRequiredMixin, View):
-    template_name = 'payments/checkout.html'
-    
-    def get(self, request):
-        try:
-            cart = Cart.objects.get(user=request.user)
-            cart_items = cart.items.all()
-            
-            if not cart_items:
-                return redirect('cart')
-                
-            total = sum(item.product.price * item.quantity for item in cart_items)
-            
-            return render(request, self.template_name, {
-                'cart_items': cart_items,
-                'total': total,
-                'mercadopago_public_key': settings.MERCADOPAGO_CONFIG['PUBLIC_KEY']
-            })
-        except Cart.DoesNotExist:
-            return redirect('cart')
+# Configurar la clave secreta de Stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
-class CreatePreferenceView(LoginRequiredMixin, View):
-    def post(self, request):
-        sdk = mercadopago.SDK(settings.MERCADOPAGO_CONFIG['ACCESS_TOKEN'])
+@csrf_exempt
+@require_http_methods(["POST"])
+def create_payment_intent(request):
+    try:
+        data = json.loads(request.body)
+        cart_total = Decimal(data.get('total_amount', 0))
         
-        try:
-            cart = Cart.objects.get(user=request.user)
-            cart_items = cart.items.all()
+        # Validar que el monto no sea 0
+        if cart_total <= 0:
+            return JsonResponse({'error': 'El monto debe ser mayor a 0'}, status=400)
             
-            if not cart_items:
-                return JsonResponse({'error': 'Cart is empty'}, status=400)
-            
-            total = sum(item.product.price * item.quantity for item in cart_items)
-            
-            # Crear orden en la base de datos
-            order = Order.objects.create(
-                user=request.user,
-                order_id=str(uuid.uuid4()),
-                total_amount=total,
-                status='pending'
-            )
-            
-            items = [{
-                "title": item.product.name,
-                "quantity": item.quantity,
-                "currency_id": "COP",
-                "unit_price": float(item.product.price)
-            } for item in cart_items]
-            
-            preference_data = {
-                "items": items,
-                "back_urls": {
-                    "success": request.build_absolute_uri('/payment/success/'),
-                    "failure": request.build_absolute_uri('/payment/failure/'),
-                    "pending": request.build_absolute_uri('/payment/pending/')
-                },
-                "external_reference": order.order_id,
-                "auto_return": "approved"
-            }
-
-            preference_response = sdk.preference().create(preference_data)
-            preference = preference_response["response"]
-            
-            order.preference_id = preference["id"]
-            order.save()
-
-            return JsonResponse({
-                "id": preference["id"],
-                "init_point": preference["init_point"]
-            })
-            
-        except Cart.DoesNotExist:
-            return JsonResponse({'error': 'Cart not found'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+        # Crear el PaymentIntent con Stripe
+        intent = stripe.PaymentIntent.create(
+            amount=int(cart_total * 100),  # Stripe requiere el monto en centavos
+            currency='usd',
+            payment_method_types=['card'],
+            metadata={'integration_check': 'accept_a_payment'}
+        )
+        
+        return JsonResponse({
+            'clientSecret': intent.client_secret,
+            'publicKey': settings.STRIPE_PUBLISHABLE_KEY
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)

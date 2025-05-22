@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import CheckoutView, CreatePreferenceView
+from . import views
 
 app_name = 'payments'
 
 urlpatterns = [
-    path('checkout/', CheckoutView.as_view(), name='checkout'),
-    path('create-preference/', CreatePreferenceView.as_view(), name='create_preference'),
+    path('create-payment-intent/', views.create_payment_intent, name='create_payment_intent'),
 ]

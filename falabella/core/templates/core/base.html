@@ -34,18 +34,26 @@
         <link rel="stylesheet" href="{% static 'css/MiPerfil.css' %}">
 
         
-        {% block extra_css %}{% endblock %}
+        {% block extra_css %}
+        <style>
+            body.payment-success {
+                background-color: #f8f9fa;
+            }
+            .payment-success-container {
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+            }
+        </style>
+        {% endblock %}
     </head>
 
     <body>
-        <!-- Contenedor principal -->
-        <div class="container-fluid">
-
-            <!-- Navbar Homecenter/Linio --><!-- Main Navbar -->
-            {% include 'partials/navbar.html' %}
-
-            <!-- Contenido principal -->
-            <main>
+        {% include 'partials/navbar.html' %}
+        
+        <!-- Contenido principal -->
+        <main>
+            {% if not is_payment_success %}
                 <!-- Carrusel -->
                 {% include 'partials/carousel.html' %}
 
@@ -60,32 +68,30 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                
-                {% block content %}{% endblock %}
-                
-                <!-- vista de productos -->
+            {% endif %}
+            
+            {% block content %}{% endblock %}
+            
+            {% if not is_payment_success and not hide_products %}
                 {% include 'partials/products/products.html' %}
-                
-            </main>
+            {% endif %}
+        </main>
 
-            <!-- Modales -->
-            {% include 'partials/modals/login.html' %}
-            {% include 'partials/modals/register.html' %}
-            {% include 'partials/modals/rec_correo.html' %}
-            {% include 'partials/modals/rec_sms.html' %}
-            {% include 'partials/modals/car.html' %}
-            {% include 'partials/modals/cambio_contra.html' %}
-            {% include 'partials/modals/entrega.html' %}
-            {% include 'partials/modals/pago.html' %}
-            {% include 'partials/modals/selec_direccion.html' %}
-            {% include 'partials/modals/form_direccion.html' %}
-            {% include 'partials/modals/MiPerfil.html' %}
+        <!-- Modales -->
+        {% include 'partials/modals/login.html' %}
+        {% include 'partials/modals/register.html' %}
+        {% include 'partials/modals/rec_correo.html' %}
+        {% include 'partials/modals/rec_sms.html' %}
+        {% include 'partials/modals/car.html' %}
+        {% include 'partials/modals/cambio_contra.html' %}
+        {% include 'partials/modals/entrega.html' %}
+        {% include 'partials/modals/pago.html' %}
+        {% include 'partials/modals/selec_direccion.html' %}
+        {% include 'partials/modals/form_direccion.html' %}
+        {% include 'partials/modals/MiPerfil.html' %}
 
-            <!-- Footer -->
-            {% include 'partials/footer.html' %}
-        </div>
-
-        
+        <!-- Footer -->
+        {% include 'partials/footer.html' %}
         
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -108,7 +114,11 @@
         <script src="{% static 'js/selec_direccion.js' %}"></script>
         <script src="{% static 'js/form_direccion.js' %}"></script>
         <script src="{% static 'js/MiPerfil.js' %}"></script>
-
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="{% static 'js/stripe-form.js' %}"></script>
+        <script>
+            const PAYMENT_SUCCESS_URL = "{% url 'core:payment_success' %}";
+        </script>
 
         
         {% block extra_js %}{% endblock %}

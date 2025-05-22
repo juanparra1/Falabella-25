@@ -57,7 +57,7 @@ urlpatterns = [
     path('api/', include('products.urls')),#Ruta de productos
     path("cart/", include("cart.urls")),  # Agrega esta línea
     path("products/", include("products.urls")),
-    path('payment/', include('payments.urls', namespace='payments')),
+    path('payments/', include('payments.urls')),
 ]
 
 if settings.DEBUG:
