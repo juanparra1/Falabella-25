@@ -49,7 +49,7 @@ function setupLoginAndRegistration() {
                     return response.json();
                 } else {
                     return response.json().then(data => {
-                        throw new Error(data.detail || 'Error en el inicio de sesión');
+                        throw new Error(data.error || 'Error en el inicio de sesión');
                     });
                 }
             })
@@ -60,28 +60,37 @@ function setupLoginAndRegistration() {
                     localStorage.setItem('refresh_token', data.refresh);
                     localStorage.setItem('user_name', data.first_name);
                     sessionStorage.setItem('isLoggedIn', 'true');
-
+                    
                     // Actualizar UI
                     updateNavbarLoginState(data.first_name);
                     
-                    // Cerrar el modal correctamente
+                    // Cerrar el modal de login
                     const modalElement = document.getElementById('loginModal');
                     const modalInstance = bootstrap.Modal.getInstance(modalElement);
                     modalInstance.hide();
-                    
-                    // Limpiar efectos del modal
-                    document.body.classList.remove('modal-open');
-                    document.body.style.removeProperty('overflow');
-                    document.body.style.removeProperty('padding-right');
-                    
-                    // Eliminar backdrop
-                    const backdrop = document.querySelector('.modal-backdrop');
-                    if (backdrop) backdrop.remove();
 
-                    // Mostrar mensaje de éxito
-                    setTimeout(() => {
-                        alert('Inicio de sesión exitoso');
-                    }, 100);
+                    // Remover el backdrop y limpiar clases del body
+                    document.body.classList.remove('modal-open');
+                    document.body.style.removeProperty('padding-right');
+                    const backdrop = document.querySelector('.modal-backdrop');
+                    if (backdrop) {
+                        backdrop.remove();
+                    }
+
+                    // Mostrar mensaje de éxito sin bloquear la navegación
+                    const toast = new bootstrap.Toast(document.createElement('div'));
+                    toast._element.classList.add('toast', 'position-fixed', 'top-0', 'end-0', 'm-3');
+                    toast._element.innerHTML = `
+                        <div class="toast-body bg-success text-white">
+                            Bienvenido ${data.first_name}!
+                            <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="toast"></button>
+                        </div>
+                    `;
+                    document.body.appendChild(toast._element);
+                    toast.show();
+                    
+                    // Opcional: Recargar solo si es necesario
+                    // window.location.reload();
                 }
             })
             .catch(error => {

@@ -22,18 +22,18 @@ document.addEventListener("DOMContentLoaded", function() {
         goToPagoBtn.addEventListener("click", function(e) {
             e.preventDefault();
             
-            // Obtener total del carrito
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalProducts = cart.reduce((total, item) => total + item.quantity * item.price, 0);
             const precioEntrega = getEntregaSeleccionada();
             const totalAmount = totalProducts + precioEntrega;
             
-            // Crear PaymentIntent
-            fetch('/payments/create-payment-intent/', {
+            fetch('/api/payments/create-payment-intent/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken(),
                 },
+                credentials: 'same-origin', // Importante para las cookies
                 body: JSON.stringify({
                     total_amount: totalAmount
                 })
@@ -120,4 +120,21 @@ function actualizarResumenPago() {
     document.getElementById("pago-descuentos").textContent = `- $${descuentos.toLocaleString()}`;
     document.getElementById("pago-entregas").textContent = `$${entregas.toLocaleString()}`;
     document.getElementById("pago-total").textContent = `$${(totalProducts - descuentos + entregas).toLocaleString()}`;
+}
+
+// Función para obtener el token CSRF
+function getCSRFToken() {
+    const name = 'csrftoken';
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
