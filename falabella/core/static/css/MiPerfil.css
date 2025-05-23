@@ -171,7 +171,6 @@
     font-weight: 600;
     font-size: 1.1rem;
     margin-top: 1rem;
-    background: #222;
     border: none;
     transition: background 0.2s;
 }
@@ -183,8 +182,13 @@
 }
 
 #perfil-modal #guardar-btn:not(:disabled) {
-    background: #002d5b;
+    background: linear-gradient(90deg, rgb(106, 149, 0), rgb(141, 199, 0)); /* Color verde Falabella */
     color: #fff;
+}
+
+#perfil-modal #guardar-btn:not(:disabled):hover {
+    background: linear-gradient(90deg, rgb(96, 139, 0), rgb(131, 189, 0)); /* Versión más oscura para hover */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #perfil-modal .invalid-feedback {

@@ -132,21 +132,34 @@ class AddressDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
-
+    
     def get(self, request):
         user = request.user
-        return Response({
-            'username': user.username,
+        data = {
+            'id': user.id,
             'email': user.email,
-        })
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'documento': user.documento,
+            'phone': user.phone
+        }
+        return Response(data)
 
-    def patch(self, request):
-        user = request.user
-        user.username = request.data.get('username', user.username)
-        user.email = request.data.get('email', user.email)
-        user.save()
-        return Response({'message': 'Profile updated successfully'})
+class UpdateProfileView(APIView):
+    permission_classes = [IsAuthenticated]
     
+    def put(self, request):
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                'success': True,
+                'message': 'Perfil actualizado correctamente'
+            })
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomObtainPairSerializer
     #Permite obtener token de acceso y refresco

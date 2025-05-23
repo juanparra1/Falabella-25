@@ -66,39 +66,32 @@
                 <div id="datos-personales" class="perfil-section">
                     <h4>Datos personales</h4>
                     <form id="form-datos-personales" autocomplete="off">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" value="Juan David" required>
+                                <input type="text" class="form-control" id="nombre" required>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Primer apellido</label>
-                                <input type="text" class="form-control" id="apellido1" value="Martinez" required>
+                                <label class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellido1" required>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Segundo apellido</label>
-                                <input type="text" class="form-control" id="apellido2" placeholder="Ingresa tu apellido">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label">Tipo de documento</label>
-                                <input type="text" class="form-control" id="tipo-doc" value="Cédula de Ciudadanía" disabled>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label">Número de documento</label>
-                                <input type="text" class="form-control" id="cedula" value="1003765084" disabled>
+                                <label class="form-label">Documento</label>
+                                <input type="text" class="form-control" id="cedula" disabled>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">Celular</label>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background:#f5f7fa;">+57</span>
-                                    <input type="text" class="form-control" id="celular" value="3022779797" maxlength="10" pattern="\d{10}" required>
+                                    <span class="input-group-text">+57</span>
+                                    <input type="text" class="form-control" id="celular" maxlength="10" pattern="\d{10}" required>
                                 </div>
-                                <div class="invalid-feedback" id="celular-feedback">Debe tener 10 dígitos.</div>
+                                <div class="invalid-feedback">Debe tener 10 dígitos.</div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correo" value="kimaswiko.9@gmail.com" required>
-                                <div class="invalid-feedback" id="correo-feedback">Debe ser un correo válido y terminar en @ejemplo.com</div>
+                                <input type="email" class="form-control" id="correo" required>
+                                <div class="invalid-feedback">Debe ser un correo válido.</div>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-dark" id="guardar-btn" disabled>Guardar</button>
