@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mostrar modal al hacer click en "Cambiar"
     document.getElementById('cambiar-direccion-link').addEventListener('click', function(e) {
         e.preventDefault();
-        renderDirecciones();
-        const modal = new bootstrap.Modal(document.getElementById('selecDireccionModal'));
-        modal.show();
+        Direcciones.abrirModalSeleccionarDireccion(function(direccionSeleccionada) {
+            document.getElementById('direccion-actual').textContent = direccionSeleccionada;
+        });
     });
 
     // Agregar nueva dirección: cerrar este modal y abrir el de agregar
@@ -12,12 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const modalSeleccion = bootstrap.Modal.getInstance(document.getElementById('selecDireccionModal'));
         if (modalSeleccion) modalSeleccion.hide();
         setTimeout(() => {
-            const modalAgregar = new bootstrap.Modal(document.getElementById('agregarDireccionModal'));
-            modalAgregar.show();
+            Direcciones.abrirModalAgregarDireccion(() => {
+                // Al agregar, vuelve a abrir el modal de selección actualizado
+                Direcciones.abrirModalSeleccionarDireccion(function(direccionSeleccionada) {
+                    document.getElementById('direccion-actual').textContent = direccionSeleccionada;
+                });
+            });
         }, 400);
     });
 
-    // Seleccionar dirección
+    // Seleccionar dirección (si usas radios, ajusta aquí)
     document.getElementById('seleccionar-direccion').addEventListener('click', function() {
         const seleccionada = document.querySelector('input[name="direccion-radio"]:checked');
         if (seleccionada) {
@@ -25,13 +29,5 @@ document.addEventListener('DOMContentLoaded', function() {
             const modal = bootstrap.Modal.getInstance(document.getElementById('selecDireccionModal'));
             modal.hide();
         }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Cuando quieras abrir el modal de selección:
-    Direcciones.abrirModalSeleccionarDireccion(function(direccionSeleccionada) {
-        // Haz lo que necesites con la dirección seleccionada
-        document.getElementById('direccion-actual').textContent = direccionSeleccionada;
     });
 });
