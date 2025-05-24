@@ -60,37 +60,51 @@ function setupLoginAndRegistration() {
                     localStorage.setItem('refresh_token', data.refresh);
                     localStorage.setItem('user_name', data.first_name);
                     sessionStorage.setItem('isLoggedIn', 'true');
-                    
-                    // Actualizar UI
-                    updateNavbarLoginState(data.first_name);
-                    
-                    // Cerrar el modal de login
-                    const modalElement = document.getElementById('loginModal');
-                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                    modalInstance.hide();
 
-                    // Remover el backdrop y limpiar clases del body
+                    // Actualizar UI primero
+                    updateNavbarLoginState(data.first_name);
+
+                    // Limpiar cualquier backdrop existente
+                    document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
                     document.body.classList.remove('modal-open');
                     document.body.style.removeProperty('padding-right');
-                    const backdrop = document.querySelector('.modal-backdrop');
-                    if (backdrop) {
-                        backdrop.remove();
+
+                    // Cerrar el modal
+                    const modalElement = document.getElementById('loginModal');
+                    if (modalElement) {
+                        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                        if (modalInstance) {
+                            modalInstance.hide();
+                        }
+                        modalElement.classList.remove('show');
+                        modalElement.style.display = 'none';
                     }
 
-                    // Mostrar mensaje de éxito sin bloquear la navegación
-                    const toast = new bootstrap.Toast(document.createElement('div'));
-                    toast._element.classList.add('toast', 'position-fixed', 'top-0', 'end-0', 'm-3');
-                    toast._element.innerHTML = `
+                    // Mostrar toast de bienvenida
+                    const toastContainer = document.createElement('div');
+                    toastContainer.className = 'position-fixed top-0 end-0 p-3';
+                    toastContainer.style.zIndex = '9999';
+                    
+                    const toastElement = document.createElement('div');
+                    toastElement.className = 'toast';
+                    toastElement.innerHTML = `
                         <div class="toast-body bg-success text-white">
-                            Bienvenido ${data.first_name}!
+                            ¡Bienvenido ${data.first_name}!
                             <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="toast"></button>
                         </div>
                     `;
-                    document.body.appendChild(toast._element);
-                    toast.show();
                     
-                    // Opcional: Recargar solo si es necesario
-                    // window.location.reload();
+                    toastContainer.appendChild(toastElement);
+                    document.body.appendChild(toastContainer);
+                    
+                    const toast = new bootstrap.Toast(toastElement, {
+                        delay: 3000,
+                        autohide: true
+                    });
+                    toast.show();
+
+                    // Limpiar el formulario
+                    loginForm.reset();
                 }
             })
             .catch(error => {
