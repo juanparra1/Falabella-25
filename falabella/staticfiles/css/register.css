@@ -1,0 +1,26 @@
+/* Estilo para los íconos */
+.bi {
+    font-size: 24px;
+    color: #000;
+}
+
+/* Espaciado entre íconos y texto */
+.d-flex.align-items-center {
+    gap: 10px;
+}
+
+/* Línea de separación con degradado */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+
+.btn-register {
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    padding: 5px 10px; /* Reduce el relleno interno */
+    background-color: #f3f1eb; /* Fondo blanco */
+    color: #000000; /* Texto negro */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+}

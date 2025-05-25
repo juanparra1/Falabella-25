@@ -1,0 +1,33 @@
+/* Puedes agregar esto a tu cart.css o un archivo global */
+#entrega-modal {
+    background: #ffffff;
+    padding: 32px 0;
+    min-height: 100vh;
+}
+#entrega-modal .card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Contenedor principal */
+#entrega-modal .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Productos */
+#entrega-modal .flex-grow-1 {
+    flex: 1;
+}
+
+/* Resumen */
+#entrega-modal .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#entrega-modal .card p {
+    margin: 0;
+}

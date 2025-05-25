@@ -109,26 +109,189 @@
                     </div>
                 </div>
                 <div id="medios-pago" class="perfil-section" style="display:none;">
-                    <h4>Medios de pago</h4>
-                    <p>Aquí irán los formularios de medios de pago.</p>
+                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                        <h4 class="mb-4">Medios de pago</h4>
+                        <div class="mb-3" style="font-weight:500;">Tarjeta CMR Falabella</div>
+                        <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
+                            <i class="bi bi-file-earmark-text" style="font-size:3rem; color:#bbb;"></i>
+                            <div class="text-muted mt-2 mb-4" style="font-size:1.1rem;">No tienes tarjetas CMR disponibles</div>
+                            <button class="btn btn-outline-dark w-100" style="max-width:420px; border-radius:2rem; font-weight:600;">
+                                + Agregar tarjeta CMR
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                        <div class="mb-3" style="font-weight:500;">Otras tarjetas de crédito</div>
+                        <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
+                            <i class="bi bi-file-earmark-text" style="font-size:3rem; color:#bbb;"></i>
+                            <div class="text-muted mt-2 mb-4" style="font-size:1.1rem;">No tienes tarjetas de crédito disponibles</div>
+                            <button class="btn btn-outline-dark w-100" style="max-width:420px; border-radius:2rem; font-weight:600;">
+                                + Agregar tarjeta de crédito
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                        <div class="mb-3" style="font-weight:500;">Tarjeta Débito Banco Falabella</div>
+                        <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
+                            <i class="bi bi-file-earmark-text" style="font-size:3rem; color:#bbb;"></i>
+                            <div class="text-muted mt-2 mb-4" style="font-size:1.1rem;">No tienes tarjetas débito Falabella disponibles</div>
+                            <button class="btn btn-outline-dark w-100" style="max-width:420px; border-radius:2rem; font-weight:600;">
+                                + Agregar tarjeta débito Falabella
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                        <div class="mb-3" style="font-weight:500;">Otras tarjetas de débito</div>
+                        <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
+                            <i class="bi bi-file-earmark-text" style="font-size:3rem; color:#bbb;"></i>
+                            <div class="text-muted mt-2 mb-4" style="font-size:1.1rem;">No tienes tarjetas de débito disponibles</div>
+                            <button class="btn btn-outline-dark w-100" style="max-width:420px; border-radius:2rem; font-weight:600;">
+                                + Agregar tarjeta de débito
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card p-4" style="background:#fafbfc;">
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-dark px-5 py-2" style="border-radius:2rem; font-weight:600; min-width:250px;">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div id="reembolso" class="perfil-section" style="display:none;">
-                    <h4>Datos para reembolso</h4>
-                    <p>Aquí irán los formularios de reembolso.</p>
+                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                        <h4 class="mb-3">Datos para reembolso</h4>
+                        <p class="mb-4" style="font-size:1.08rem;">
+                            Ingresa una cuenta bancaria asociada a la
+                            <b>cédula de ciudadanía o extranjería registrada en falabella.com</b>
+                            para futuros reembolsos.
+                        </p>
+                        <form id="form-reembolso" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Banco</label>
+                                    <select class="form-control" id="banco" required style="border:none; border-bottom:2px solid #e0e0e0; border-radius:0; background:transparent;">
+                                        <option value="">Selecciona un banco</option>
+                                        <option>Bancolombia</option>
+                                        <option>Banco Falabella</option>
+                                        <option>Davivienda</option>
+                                        <option>Banco de Bogotá</option>
+                                        <option>Banco de Occidente</option>
+                                        <!-- Agrega más bancos si lo deseas -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Tipo de cuenta</label>
+                                    <select class="form-control" id="tipo-cuenta" required style="border:none; border-bottom:2px solid #e0e0e0; border-radius:0; background:transparent;">
+                                        <option value="">Selecciona tipo de cuenta</option>
+                                        <option>Ahorros</option>
+                                        <option>Corriente</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Número de cuenta bancaria</label>
+                                    <input type="text" class="form-control" id="cuenta" required maxlength="20" style="border:none; border-bottom:2px solid #e0e0e0; border-radius:0; background:transparent;">
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Confirma tu número de cuenta bancaria</label>
+                                    <input type="text" class="form-control" id="cuenta-confirm" required maxlength="20" style="border:none; border-bottom:2px solid #e0e0e0; border-radius:0; background:transparent;">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-4">
+                                <button type="submit" class="btn btn-dark px-5 py-2" style="border-radius:2rem; font-weight:600; min-width:250px;" disabled>
+                                    Guardar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div id="listas" class="perfil-section" style="display:none;">
                     <h4>Mis listas</h4>
                     <p>Aquí irán tus listas guardadas.</p>
                 </div>
                 <div id="configurar-cuenta" class="perfil-section" style="display:none;">
-                    <h4>Configurar mi cuenta</h4>
-                    <p>Aquí irán las opciones de configuración.</p>
+                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                        <h4 class="mb-3">Cambiar contraseña</h4>
+                        <form id="form-cambiar-contra" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Contraseña actual</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="actual-contra" placeholder="Ingresa tu contraseña actual"
+                                            style="border:none; border-bottom:2px solid #e0e0e0; border-radius:0; background:transparent;">
+                                        <button type="button" class="btn btn-link px-2" tabindex="-1" onclick="togglePassword('actual-contra', this)">
+                                            <i class="bi bi-eye-slash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Nueva contraseña</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="nueva-contra" placeholder="Ingresa tu nueva contraseña"
+                                            style="border:none; border-bottom:2px solid #e0e0e0; border-radius:0; background:transparent;">
+                                        <button type="button" class="btn btn-link px-2" tabindex="-1" onclick="togglePassword('nueva-contra', this)">
+                                            <i class="bi bi-eye-slash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <ul class="list-inline text-muted" style="font-size:1.05rem;">
+                                        <li class="list-inline-item me-4"><i class="bi bi-dot"></i> Mín. 8 caracteres</li>
+                                        <li class="list-inline-item me-4"><i class="bi bi-dot"></i> 1 mayúscula</li>
+                                        <li class="list-inline-item me-4"><i class="bi bi-dot"></i> 1 minúscula</li>
+                                        <li class="list-inline-item me-4"><i class="bi bi-dot"></i> 1 número</li>
+                                        <li class="list-inline-item"><i class="bi bi-dot"></i> Sin espacio</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-dark px-5 py-2" style="border-radius:2rem; font-weight:600; min-width:250px;" disabled>
+                                    Cambiar contraseña
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card p-3 mb-4" style="background:#fff4f4; border:1.5px solid #f3c1c1;">
+                        <button class="btn w-100 d-flex justify-content-between align-items-center text-danger" style="background:transparent; font-size:1.2rem; font-weight:600;">
+                            Eliminar cuenta
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
                 <div id="pagar-cmr" class="perfil-section" style="display:none;">
-                    <h4>Pagar mi CMR</h4>
-                    <p>Aquí irán las opciones de pago CMR.</p>
+                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                        <h4 class="mb-4">Pagar mi CMR</h4>
+                        <div class="d-flex flex-column align-items-center justify-content-center py-5" style="min-height:220px;">
+                            <i class="bi bi-credit-card-2-front" style="font-size:4rem; color:#b0b7be;"></i>
+                            <div class="text-center mt-4" style="font-size:1.35rem; color:#7a7a7a;">
+                                Abrimos una nueva pestaña en tu navegador para ingresar a
+                                <a href="https://www.cmr.cl/web/cmr-cl/paga-tu-cmr" target="_blank" style="color:#4a4a4a; text-decoration:underline; font-weight:500;">
+                                    Pagar CMR
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+// Simple función para mostrar/ocultar contraseña
+function togglePassword(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const icon = btn.querySelector('i');
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    } else {
+        input.type = "password";
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    }
+}
+</script>

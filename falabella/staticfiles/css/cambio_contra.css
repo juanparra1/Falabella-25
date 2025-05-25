@@ -1,0 +1,19 @@
+#password-reset-container {
+    z-index: 1050; /* Asegúrate de que sea mayor que el modal */
+    position: relative; /* Si es necesario */
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.password-requirements ul {
+    padding-left: 20px;
+}
+
+.password-requirements li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.password-requirements li.text-success {
+    color: green !important;
+}

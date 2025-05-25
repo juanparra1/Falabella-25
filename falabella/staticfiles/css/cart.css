@@ -1,0 +1,22 @@
+/* Contenedor principal */
+#cart-modal .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Productos */
+#cart-modal .flex-grow-1 {
+    flex: 1;
+}
+
+/* Resumen */
+#cart-modal .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#cart-modal .card p {
+    margin: 0;
+}

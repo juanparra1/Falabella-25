@@ -13,9 +13,4 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         showModule('inlineRegisterForm'); // Muestra el módulo de registro
     });
-
-    document.getElementById('myAccountLink').addEventListener('click', (event) => {
-        event.preventDefault();
-        showModule('myAccountForm'); // Muestra el módulo de "Mi cuenta" (asegúrate de que exista)
-    });
 });
