@@ -52,6 +52,15 @@ class ProductListView(APIView):
     permission_classes = [AllowAny]  # Ver lista de productos es público
 
     def get(self, request):
+        category = request.query_params.get('category', None)
         products = Product.objects.all()
+        
+        if category:
+            # Usamos icontains en lugar de iexact para ser más flexibles con el match
+            products = products.filter(category__icontains=category.strip())
+            print(f"Filtering by category: {category}")
+            print(f"SQL Query: {products.query}")  # Debug para ver la consulta SQL
+            print(f"Found {products.count()} products")
+        
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)

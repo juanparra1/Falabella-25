@@ -6,18 +6,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Función para cargar productos desde la API
-function loadProducts(category) {
-    fetch(`/api/products/?category=${category}`)
+function loadProducts(category = '') {
+    const productsList = document.getElementById('products-list');
+    productsList.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"></div></div>';
+
+    // Construir la URL con el parámetro de categoría
+    const url = category 
+        ? `/api/products/?category=${encodeURIComponent(category.trim())}`
+        : '/api/products/';
+        
+    console.log('Fetching URL:', url); // Para debugging
+
+    fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error al obtener productos: ${response.statusText}`);
             }
             return response.json();
         })
-        .then(data => displayProducts(data))
+        .then(data => {
+            console.log('Products received:', data); // Para debugging
+            
+            // Filtrar productos por categoría exacta
+            const filteredProducts = category 
+                ? data.filter(product => 
+                    product.category && 
+                    product.category.toLowerCase() === category.toLowerCase())
+                : data;
+
+            if (filteredProducts.length === 0) {
+                productsList.innerHTML = `
+                    <div class="col-12 text-center">
+                        <p>No hay productos disponibles en la categoría ${category}</p>
+                    </div>`;
+                return;
+            }
+            displayProducts(filteredProducts);
+        })
         .catch(error => {
             console.error('Error al cargar productos:', error);
-            showErrorMessage('No se pudieron cargar los productos. Inténtalo de nuevo más tarde.');
+            productsList.innerHTML = `
+                <div class="col-12 text-center text-danger">
+                    <p>Error al cargar los productos. Por favor, intenta de nuevo.</p>
+                </div>`;
         });
 }
 
