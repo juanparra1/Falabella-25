@@ -37,6 +37,22 @@
     align-items: center;
 }
 
+#perfil-modal .perfil-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem 2rem 1.5rem 2rem;
+    box-shadow: 0 2px 8px rgba(60,60,60,0.04);
+    margin-bottom: 1.5rem;
+    min-height: 220px;
+}
+
+#perfil-modal .perfil-card h4 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+
 #perfil-modal .perfil-tab-btn:not(:last-child) {
     border-right: 1px solid #eee;
 }
@@ -105,7 +121,7 @@
 #perfil-modal #perfil-menu .list-group-item.active,
 #perfil-modal #perfil-menu .list-group-item:focus,
 #perfil-modal #perfil-menu .list-group-item:hover {
-    background: #f5f7fa;
+    background: #ffffff;
     color: #222;
     font-weight: 600;
 }

@@ -185,21 +185,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (favBtn) {
         favBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Abre el módulo de perfil
             if (window.abrirMiCuentaModulo) {
                 window.abrirMiCuentaModulo();
                 setTimeout(() => {
-                    // Quitar active de todos los botones del menú lateral
                     document.querySelectorAll('#perfil-menu .list-group-item').forEach(b => b.classList.remove('active'));
-                    // Activar el botón de listas
                     const btnListas = document.querySelector('#perfil-menu .list-group-item[data-section="listas"]');
                     if (btnListas) btnListas.classList.add('active');
-                    // Ocultar todas las secciones
                     document.querySelectorAll('.perfil-section').forEach(sec => sec.style.display = 'none');
-                    // Mostrar la sección de listas
                     const secListas = document.getElementById('listas');
                     if (secListas) secListas.style.display = 'block';
-                }, 300); // Ajusta el tiempo si tu animación es más rápida o lenta
+                }, 700); // prueba con 700ms
             }
         });
     }

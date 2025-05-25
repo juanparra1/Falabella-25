@@ -63,7 +63,7 @@
         <div class="col-md-9">
             <div id="perfil-content">
                 <!-- Aquí se mostrará el contenido de cada sección -->
-                <div id="datos-personales" class="perfil-section">
+                <div id="datos-personales" class="perfil-section perfil-card">
                     <h4>Datos personales</h4>
                     <form id="form-datos-personales" autocomplete="off">
                         {% csrf_token %}
@@ -97,7 +97,7 @@
                         <button type="submit" class="btn btn-dark" id="guardar-btn" disabled>Guardar</button>
                     </form>
                 </div>
-                <div id="direcciones" class="perfil-section" style="display:none;">
+                <div id="direcciones" class="perfil-section perfil-card" style="display:none;">
                     <h4>Direcciones</h4>
                     <div id="lista-direcciones" class="mb-4">
                         <!-- Aquí se renderizan las direcciones -->
@@ -108,8 +108,8 @@
                         </button>
                     </div>
                 </div>
-                <div id="medios-pago" class="perfil-section" style="display:none;">
-                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                <div id="medios-pago" class="perfil-section perfil-card" style="display:none;">
+                    <div class="card p-4 mb-4">
                         <h4 class="mb-4">Medios de pago</h4>
                         <div class="mb-3" style="font-weight:500;">Tarjeta CMR Falabella</div>
                         <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
@@ -120,7 +120,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                    <div class="card p-4 mb-4" >
                         <div class="mb-3" style="font-weight:500;">Otras tarjetas de crédito</div>
                         <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
                             <i class="bi bi-file-earmark-text" style="font-size:3rem; color:#bbb;"></i>
@@ -130,7 +130,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                    <div class="card p-4 mb-4"  >
                         <div class="mb-3" style="font-weight:500;">Tarjeta Débito Banco Falabella</div>
                         <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
                             <i class="bi bi-file-earmark-text" style="font-size:3rem; color:#bbb;"></i>
@@ -140,7 +140,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                    <div class="card p-4 mb-4"  >
                         <div class="mb-3" style="font-weight:500;">Otras tarjetas de débito</div>
                         <div class="d-flex flex-column align-items-center justify-content-center py-4" style="min-height:180px;">
                             <i class="bi bi-file-earmark-text" style="font-size:3rem; color:#bbb;"></i>
@@ -150,7 +150,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card p-4" style="background:#fafbfc;">
+                    <div class="card p-4"  >
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-dark px-5 py-2" style="border-radius:2rem; font-weight:600; min-width:250px;">
                                 Guardar
@@ -158,8 +158,8 @@
                         </div>
                     </div>
                 </div>
-                <div id="reembolso" class="perfil-section" style="display:none;">
-                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                <div id="reembolso" class="perfil-section perfil-card" style="display:none;">
+                    <div class="card p-4 mb-4"  >
                         <h4 class="mb-3">Datos para reembolso</h4>
                         <p class="mb-4" style="font-size:1.08rem;">
                             Ingresa una cuenta bancaria asociada a la
@@ -205,12 +205,12 @@
                         </form>
                     </div>
                 </div>
-                <div id="listas" class="perfil-section" style="display:none;">
+                <div id="listas" class="perfil-section perfil-card" style="display:none;">
                     <h4>Mis listas</h4>
                     <p>Aquí irán tus listas guardadas.</p>
                 </div>
-                <div id="configurar-cuenta" class="perfil-section" style="display:none;">
-                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                <div id="configurar-cuenta" class="perfil-section perfil-card" style="display:none;">
+                    <div class="card p-4 mb-4"  >
                         <h4 class="mb-3">Cambiar contraseña</h4>
                         <form id="form-cambiar-contra" autocomplete="off">
                             <div class="row">
@@ -260,8 +260,8 @@
                         </button>
                     </div>
                 </div>
-                <div id="pagar-cmr" class="perfil-section" style="display:none;">
-                    <div class="card p-4 mb-4" style="background:#fafbfc;">
+                <div id="pagar-cmr" class="perfil-section perfil-card" style="display:none;">
+                    <div class="card p-4 mb-4"  >
                         <h4 class="mb-4">Pagar mi CMR</h4>
                         <div class="d-flex flex-column align-items-center justify-content-center py-5" style="min-height:220px;">
                             <i class="bi bi-credit-card-2-front" style="font-size:4rem; color:#b0b7be;"></i>
